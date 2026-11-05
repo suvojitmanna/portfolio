@@ -1,10 +1,10 @@
 import React from "react";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.JPG";
-import img3 from "../assets/img3.JPG";
-import photo1 from "../assets/photo1.JPG";
-import photo2 from "../assets/photo2.PNG";
+import img2 from "../assets/img2.jpg";
+import img3 from "../assets/img3.jpg";
+import photo1 from "../assets/photo1.jpg";
+import photo2 from "../assets/photo2.png";
 import photo3 from "../assets/photo3.png";
 
 const MH3 = motion.h3;
@@ -78,7 +78,7 @@ export default function Projects() {
       ref={sceneRef}
       className="relative text-white"
       style={{
-        height: `${100 * projects.length}vh`, 
+        height: `${100 * projects.length}vh`,
         backgroundColor: activeProject.bgColor,
         transition: "background-color 400ms ease",
       }}
