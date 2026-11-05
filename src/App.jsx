@@ -20,11 +20,7 @@ export default function App() {
       <CustomCursor />
       <Navbar />
       <MusicPlayer />
-
-      {/* Intro always on top until it finishes */}
       {!introDone && <IntroAnimation onFinish={() => setIntroDone(true)} />}
-
-      {/* Homepage always present (masked reveal) */}
       <Home introDone={introDone} />
 
       <About />

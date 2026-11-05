@@ -7,11 +7,10 @@ import { FaYoutube, FaInstagram } from "react-icons/fa6";
 import ParticleBackground from "../components/ParticlesBackground";
 
 const socials = [
-  { Icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com/@gauravbitss" },
-  { Icon: FaXTwitter, label: "X", href: "https://x.com/gauravbuilds" },
-  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/gaurav-gupta-4179671b0/" },
+  { Icon: FaXTwitter, label: "X", href: "https://x.com/Suvojit9093" },
+  { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/suvojit-manna-505614327/" },
   { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/gauravbits/" },
-  { Icon: FaGithub, label: "GitHub", href: "https://github.com/gauravgupta364" },
+  { Icon: FaGithub, label: "GitHub", href: "https://github.com/suvojitmanna" },
 ];
 
 
@@ -40,7 +39,6 @@ const Home = React.forwardRef((props, ref) => {
   const [subIndex, setSubIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
 
-  // typing effect logic
   useEffect(() => {
     const current = roles[index];
     const timeout = setTimeout(() => {
@@ -52,7 +50,7 @@ const Home = React.forwardRef((props, ref) => {
         setDeleting(false);
         setIndex((p) => (p + 1) % roles.length);
       }
-    }, deleting ? 40 : 60); // original typing speed
+    }, deleting ? 40 : 60);
     return () => clearTimeout(timeout);
   }, [subIndex, deleting, index, roles]);
 
@@ -64,7 +62,6 @@ const Home = React.forwardRef((props, ref) => {
     >
       <ParticleBackground />
 
-      {/* gradient blobs */}
       <div className="absolute inset-0">
         <div
           className="absolute -top-32 -left-32 
@@ -91,7 +88,6 @@ const Home = React.forwardRef((props, ref) => {
       </div>
 
       <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
-        {/* left */}
         <motion.div
           className="flex flex-col justify-center h-full text-center lg:text-left relative"
           initial={{ opacity: 0, y: 120 }}
@@ -99,7 +95,6 @@ const Home = React.forwardRef((props, ref) => {
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
-            {/* typing text */}
             <motion.div
               className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 20 }}
@@ -113,7 +108,6 @@ const Home = React.forwardRef((props, ref) => {
               />
             </motion.div>
 
-            {/* name */}
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text 
               bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
@@ -128,7 +122,6 @@ const Home = React.forwardRef((props, ref) => {
               </span>
             </motion.h1>
 
-            {/* description */}
             <motion.p
               className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 40 }}
@@ -140,7 +133,6 @@ const Home = React.forwardRef((props, ref) => {
               make a difference.
             </motion.p>
 
-            {/* buttons */}
             <motion.div
               className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6"
               initial={{ opacity: 0, y: 40 }}
@@ -165,7 +157,6 @@ const Home = React.forwardRef((props, ref) => {
               </a>
             </motion.div>
 
-            {/* socials */}
             <motion.div
               className="mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start"
               initial={{ opacity: 0, y: 40 }}
@@ -192,7 +183,6 @@ const Home = React.forwardRef((props, ref) => {
           </div>
         </motion.div>
 
-        {/* right */}
         <motion.div
           className="relative hidden lg:block"
           initial={{ opacity: 0, y: 100 }}
