@@ -38,18 +38,18 @@ export default function About() {
               Suvojit Manna
             </h2>
             <p className="mt-2 text-lg sm:text-xl text-white/90 font-semibold">
-              Full Stack Developer
+              Full Stack Web Developer
             </p>
 
             <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
-              I build scalable, modern applications with a strong focus on clean architecture, delightful UX, and performance. My toolkit spans Java, React, Next.js, TypeScript, Tailwind CSS, and FastAPI—bringing ideas to life from concept to production with robust APIs and smooth interfaces.
+              I build scalable, modern applications with a strong focus on clean architecture, intuitive UX, and performance. My toolkit spans React, Next.js, Node.js, Express.js, MongoDB, TypeScript, Tailwind CSS, Socket.IO, WebRTC, and AI technologies—bringing ideas to life from concept to production with robust APIs, real-time experiences, and smooth interfaces.
             </p>
 
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-xl">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl">
               {[
-                { label: "Experience", value: "5+ years" },
-                { label: "Specialty", value: "Full Stack" },
-                { label: "Focus", value: "Performance & UX" },
+                { label: "Experience", value: "2+ years" },
+                { label: "Specialty", value: "Full Stack Development" },
+                { label: "Focus", value: "Modern AI & Scalable Applications" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -66,27 +66,10 @@ export default function About() {
                 </motion.div>
               ))}
             </div>
-
-            <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
-              <a
-                href="#projects"
-                className="inline-flex items-center justify-center rounded-lg bg-white text-black font-semibold px-5 py-3 hover:bg-gray-200 transition"
-                aria-label="View my projects"
-              >
-                View Projects
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 text-white px-5 py-3 hover:bg-white/20 transition"
-                aria-label="Get in touch"
-              >
-                Get in Touch
-              </a>
-            </div>
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-1">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             className="text-center md:text-left"
             initial={{ opacity: 0, x: -30 }}
@@ -97,12 +80,90 @@ export default function About() {
             <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
               About Me
             </h3>
+
             <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-              I’m a Software Developer, Content Creator, and Web Developer — passionate about building fast, resilient applications and sharing coding insights on Instagram and YouTube.
+              I’m <span className="font-semibold text-white">Suvojit Manna</span>, a B.Tech Computer Science student and Full Stack Developer with hands-on experience building modern, scalable web applications using the{" "}
+              <span className="font-semibold text-white">
+                MERN stack, Next.js, and TypeScript
+              </span>.
+              <br />
+              <br />
+
+              I enjoy turning complex ideas into user-friendly digital products with
+              clean architecture, efficient backend logic, intuitive interfaces, and
+              reliable software. My experience includes building{" "}
+              <span className="font-semibold text-white">
+                real-time applications, authentication systems, REST APIs, dashboards,
+                database-driven workflows, and AI-powered applications
+              </span>.
+              <br />
+              <br />
+
+              Alongside full-stack development, I’m exploring{" "}
+              <span className="font-semibold text-white">
+                AI/ML and AI application development
+              </span>
+              , combining modern web technologies with intelligent features to solve
+              practical problems. I’m passionate about learning, experimenting with
+              new technologies, and turning ideas into meaningful products that are
+              built to scale.
             </p>
-            <p className="mt-4 text-gray-400 text-base sm:text-lg">
-              I love turning ideas into scalable, user‑friendly products that make an impact.
-            </p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.div
+              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-white/[0.07] transition-all duration-300"
+              whileHover={{ y: -5 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-3">
+                Full-Stack Development
+              </h4>
+              <p className="text-gray-400 leading-relaxed">
+                MERN stack, REST APIs, authentication, dashboards
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-white/[0.07] transition-all duration-300"
+              whileHover={{ y: -5 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-3">
+                Backend & Databases
+              </h4>
+              <p className="text-gray-400 leading-relaxed">
+                Node.js, Express, MongoDB, SQL,Redis
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-white/[0.07] transition-all duration-300"
+              whileHover={{ y: -5 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-3">
+                AI & Application Development
+              </h4>
+              <p className="text-gray-400 leading-relaxed">
+                AI/ML, AI-powered applications, RAG, intelligent features
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-white/[0.07] transition-all duration-300"
+              whileHover={{ y: -5 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-3">
+                Tools & Deployment
+              </h4>
+
+              <p className="text-gray-400 leading-relaxed">
+                Git, GitHub, Docker, Vercel, Render, Postman
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
