@@ -27,7 +27,6 @@ export default function Navbar() {
   const timerId = useRef(null);
   const mobileMenuBtnRef = useRef(null);
 
-  // Intersection observer for hero/home section to keep navbar visible at top
   useEffect(() => {
     const homeSection = document.querySelector("#home");
 
@@ -50,7 +49,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // Track active section and navbar visibility on scroll
   useEffect(() => {
     const sections = [
       "home",
@@ -67,7 +65,6 @@ export default function Navbar() {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 40);
 
-      // Active section detection
       const scrollPos = currentScrollY + 220;
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -81,7 +78,6 @@ export default function Navbar() {
         }
       }
 
-      // Hide / show navbar
       if (forceVisible) {
         setVisible(true);
         return;
@@ -107,7 +103,6 @@ export default function Navbar() {
     };
   }, [forceVisible]);
 
-  // GSAP Magnetic Physics on Responsive Mobile Menu Button
   const handleMobileMenuMouseMove = (e) => {
     if (!mobileMenuBtnRef.current) return;
     const rect = mobileMenuBtnRef.current.getBoundingClientRect();
@@ -173,7 +168,7 @@ export default function Navbar() {
         </motion.a>
 
         <div className="hidden lg:flex items-center">
-          <ul className="flex items-center gap-1 bg-white/[0.05] border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.35)]">
+          <ul className="flex items-center gap-1 bg-white/[0.05] border border-white/10 px-1 py-1 rounded-full backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.35)]">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               const isHovered = hoveredLink === item.name;

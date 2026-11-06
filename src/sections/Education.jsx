@@ -209,9 +209,8 @@ function EducationCard({ item, index, isFeatured = false }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transformPerspective: 1000 }}
-      className={`education-card group relative rounded-2xl p-5 sm:p-7 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_12px_45px_rgba(0,0,0,0.5)] hover:border-[#1CD8D2]/60 hover:shadow-[0_20px_60px_rgba(28,216,210,0.22)] transition-colors duration-500 flex flex-col justify-between overflow-hidden will-change-transform ${
-        isFeatured ? "border-[#1CD8D2]/35 shadow-[0_16px_50px_rgba(28,216,210,0.14)]" : ""
-      }`}
+      className={`education-card group relative rounded-2xl p-5 sm:p-7 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_12px_45px_rgba(0,0,0,0.5)] hover:border-[#1CD8D2]/60 hover:shadow-[0_20px_60px_rgba(28,216,210,0.22)] transition-colors duration-500 flex flex-col justify-between overflow-hidden will-change-transform ${isFeatured ? "border-[#1CD8D2]/35 shadow-[0_16px_50px_rgba(28,216,210,0.14)]" : ""
+        }`}
     >
       {/* Framer Motion Spring-Smoothed Dynamic Cursor Spotlight */}
       <motion.div
@@ -372,7 +371,8 @@ function EducationCard({ item, index, isFeatured = false }) {
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1CD8D2] hover:text-[#00bf8f] transition-colors duration-200 cursor-pointer focus:outline-none"
               aria-expanded={isExpanded}
             >
-              <span>{isExpanded ? "Hide Coursework Details" : "Explore Core Coursework"}</span>
+              {isExpanded ? <><span className="">Hide Coursework Details</span></>
+                : <><span className="underline">Explore Core Coursework</span></>}
               <motion.span
                 animate={{ rotate: isExpanded ? 180 : 0 }}
                 transition={{ duration: 0.25 }}
@@ -558,16 +558,14 @@ export default function Education() {
               {/* Step 1 Button: College */}
               <button
                 onClick={() => scrollToPhase(1)}
-                className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${
-                  activePhase === 1
-                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/45 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
-                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${activePhase === 1
+                  ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/45 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
+                  : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                  }`}
               >
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    activePhase === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${activePhase === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                    }`}
                 />
                 <span className="text-[11px] sm:text-xs font-mono">
                   01 • College (B.Tech CSE)
@@ -577,16 +575,14 @@ export default function Education() {
               {/* Step 2 Button: Both Schools */}
               <button
                 onClick={() => scrollToPhase(2)}
-                className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${
-                  activePhase === 2
-                    ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/45 shadow-[0_0_15px_rgba(0,191,143,0.25)]"
-                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 cursor-pointer ${activePhase === 2
+                  ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/45 shadow-[0_0_15px_rgba(0,191,143,0.25)]"
+                  : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                  }`}
               >
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    activePhase === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${activePhase === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
+                    }`}
                 />
                 <span className="text-[11px] sm:text-xs font-mono">
                   02 • Both Schools (HS & Secondary)
