@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import DynamicMusicIcon from "./DynamicMusicIcon";
 
 const MusicPlayer = () => {
   const playlist = [
@@ -10,10 +10,19 @@ const MusicPlayer = () => {
     "/stars.mp3",
   ];
 
+  const trackNames = [
+    "I Was Never There",
+    "Escapism",
+    "Blue",
+    "YAD",
+    "Stars",
+  ];
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [infoText, setInfoText] = useState("Wanna play music while scrolling?");
   const [isHovered, setIsHovered] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [showMobileHint, setShowMobileHint] = useState(false);
 
   const audioRef = useRef(null);
@@ -59,7 +68,7 @@ const MusicPlayer = () => {
   const playTrack = (index) => {
     setCurrentTrackIndex(index);
     setIsPlaying(true);
-    setInfoText("Double tap to change the music");
+    setInfoText(`Playing: ${trackNames[index]} • Double tap to change`);
     setSourceAndMaybePlay(playlist[index], true);
   };
 
@@ -74,7 +83,7 @@ const MusicPlayer = () => {
     } else {
       setSourceAndMaybePlay(playlist[currentTrackIndex], true);
       setIsPlaying(true);
-      setInfoText("Double tap to change the music");
+      setInfoText(`Playing: ${trackNames[currentTrackIndex]} • Double tap to change`);
     }
   };
 
@@ -89,6 +98,9 @@ const MusicPlayer = () => {
     } while (nextIndex === currentTrackIndex && playlist.length > 1);
 
     setCurrentTrackIndex(nextIndex);
+    if (wasPlaying) {
+      setInfoText(`Playing: ${trackNames[nextIndex]} • Double tap to change`);
+    }
     setSourceAndMaybePlay(playlist[nextIndex], wasPlaying);
   };
 
@@ -114,7 +126,6 @@ const MusicPlayer = () => {
       const audio = audioRef.current;
       if (!audio) return;
 
-      // Do not block keys if user is typing in form inputs or if audio is not playing
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
@@ -163,7 +174,10 @@ const MusicPlayer = () => {
     <div
       className="fixed bottom-6 right-6 z-50 flex flex-col items-end group"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsButtonHovered(false);
+      }}
     >
       <div
         className={`mb-2.5 pointer-events-none transition-all duration-300 ease-out transform ${
@@ -173,7 +187,7 @@ const MusicPlayer = () => {
         } group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100`}
       >
         <div className="relative px-3.5 py-1.5 rounded-full text-xs font-medium text-cyan-200 bg-neutral-900/90 backdrop-blur-md border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center gap-2 whitespace-nowrap">
-          <span className="text-sm">🎵</span>
+          <DynamicMusicIcon isPlaying={isPlaying} size="sm" />
           <span>{infoText}</span>
           <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-neutral-900/90 border-r border-b border-cyan-400/40 rotate-45" />
         </div>
@@ -192,9 +206,17 @@ const MusicPlayer = () => {
           triggerMobileHint();
           handleDoubleTapMobile();
         }}
-        onFocus={() => setIsHovered(true)}
-        onBlur={() => setIsHovered(false)}
-        className="p-4 rounded-full shadow-lg transition transform hover:scale-110 active:scale-95 cursor-pointer relative flex items-center justify-center focus:outline-none"
+        onMouseEnter={() => setIsButtonHovered(true)}
+        onMouseLeave={() => setIsButtonHovered(false)}
+        onFocus={() => {
+          setIsHovered(true);
+          setIsButtonHovered(true);
+        }}
+        onBlur={() => {
+          setIsHovered(false);
+          setIsButtonHovered(false);
+        }}
+        className="w-14 h-14 rounded-full shadow-lg transition transform hover:scale-110 active:scale-95 cursor-pointer relative flex items-center justify-center focus:outline-none"
         style={{
           background: "linear-gradient(135deg, #00f0ff, #00ff80)",
           boxShadow: isPlaying
@@ -206,13 +228,27 @@ const MusicPlayer = () => {
         title={infoText}
       >
         {isPlaying && (
-          <span className="absolute inset-0 rounded-full animate-ping bg-cyan-400/30 pointer-events-none" />
+          <>
+            <span className="absolute inset-0 rounded-full animate-ping bg-cyan-400/25 pointer-events-none" />
+            <span className="absolute -inset-1 rounded-full animate-pulse bg-emerald-400/20 pointer-events-none" />
+            
+            <div className="pointer-events-none absolute inset-0 overflow-visible">
+              <span className="absolute -top-1 -left-2 text-cyan-200 text-sm font-bold select-none animate-floatNote1">
+                ♪
+              </span>
+              <span className="absolute -top-2 -right-2 text-emerald-200 text-xs font-bold select-none animate-floatNote2">
+                ♫
+              </span>
+            </div>
+          </>
         )}
-        {isPlaying ? (
-          <FaPause size={20} />
-        ) : (
-          <FaPlay size={20} className="translate-x-[1px]" />
-        )}
+
+        <DynamicMusicIcon
+          isPlaying={isPlaying}
+          isHovered={isButtonHovered}
+          size="md"
+          showPauseOnHover={true}
+        />
       </button>
     </div>
   );

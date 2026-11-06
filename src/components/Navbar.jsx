@@ -139,11 +139,10 @@ export default function Navbar() {
           duration: 0.4,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className={`fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 md:px-10 py-3 sm:py-3.5 z-50 transition-colors duration-300 ${
-          isScrolled
+        className={`fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 md:px-10 py-3 sm:py-3.5 z-50 transition-colors duration-300 ${isScrolled
             ? "bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             : "bg-transparent border-b border-transparent"
-        }`}
+          }`}
       >
         <motion.a
           href="#home"
@@ -179,11 +178,10 @@ export default function Navbar() {
                     href={item.href}
                     onMouseEnter={() => setHoveredLink(item.name)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className={`relative z-10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 block ${
-                      isActive
+                    className={`relative z-10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 block ${isActive
                         ? "text-white font-bold"
                         : "text-gray-400 hover:text-white"
-                    }`}
+                      }`}
                   >
                     {item.name}
 
