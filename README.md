@@ -89,6 +89,7 @@ Portfolio
 ├── 🛠️ Skills
 ├── 🚀 Projects
 ├── 💼 Experience
+├── 🎓 Education
 ├── 💬 Testimonials
 ├── 📧 Contact
 └── 🎵 Music Player
