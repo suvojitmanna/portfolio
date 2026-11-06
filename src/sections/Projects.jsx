@@ -84,16 +84,16 @@ export default function Projects() {
       }}
     >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-        <h2 className={`text-3xl font-semibold z-10 text-center ${isMobile ? "mt-4" : "mt-8"}`}>
+        <h2 className={`text-3xl font-semibold z-10 text-center ${isMobile ? "mt-4" : "mt-2"}`}>
           My Work
         </h2>
-        <div className={`relative w-full flex-1 flex items-center justify-center ${isMobile ? "-mt-4" : ""}`}>
+        <div className={`relative w-full flex-1 flex items-center justify-center ${isMobile ? "-mt-4" : "-mt-8"}`}>
           {projects.map((project, idx) => (
             <div
               key={project.title}
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${activeIndex === idx ? "opacity-100 z-20" : "opacity-0 z-0 sm:z-10"
                 }`}
-              style={{ width: "85%", maxWidth: "1200px" }}
+              style={{ width: "85%", maxWidth: "1200px", }}
             >
               <AnimatePresence mode="wait">
                 {activeIndex === idx && (
@@ -103,7 +103,7 @@ export default function Projects() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 30 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`block text-center text-[clamp(2rem,6vw,5rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[35%] lg:left-[-5%] sm:mb-0 font-bangers italic font-semibold ${isMobile ? "-mt-25" : ""
+                    className={`block text-center text-[clamp(2rem,5vw,4rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold ${isMobile ? "-mt-25" : "mt-13"
                       }`}
                     style={{ zIndex: 5, textAlign: isMobile ? "center" : "left" }}
                   >
@@ -113,8 +113,8 @@ export default function Projects() {
               </AnimatePresence>
 
               <div
-                className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
-                  } h-[62vh] sm:h-[66vh]`}
+                className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] mt-10 sm:ml-15 ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
+                  } h-[62vh] sm:h-[78vh] w-[62vh] sm:w-[150vh]`}
                 style={{ zIndex: 10, transition: "box-shadow 250ms ease" }}
               >
                 <img
@@ -141,12 +141,12 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className={`absolute ${isMobile ? "bottom-20" : "bottom-10"}`}>
+        <div className={`absolute ${isMobile ? "bottom-20" : "bottom-5"}`}>
           <a
             href={activeProject?.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 font-semibold rounded-lg bg-white text-black hover:bg-gray-200 transition-all"
+            className="inline-block px-6 py-2.5 font-semibold rounded-xl bg-white text-black hover:bg-gray-200 transition-all"
             aria-label={`View ${activeProject?.title}`}
           >
             View Project
