@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import DynamicMusicIcon from "./DynamicMusicIcon";
 
 const MusicPlayer = () => {
   const playlist = [
@@ -10,17 +10,38 @@ const MusicPlayer = () => {
     "/stars.mp3",
   ];
 
+  const trackNames = [
+    "I Was Never There",
+    "Escapism",
+    "Blue",
+    "YAD",
+    "Stars",
+  ];
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [infoText, setInfoText] = useState("Wanna play music while scrolling?");
+  const [isHovered, setIsHovered] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [showMobileHint, setShowMobileHint] = useState(false);
+
   const audioRef = useRef(null);
   const lastTapTime = useRef(0);
   const clickTimeout = useRef(null);
+  const mobileHintTimeout = useRef(null);
   const isPlayingRef = useRef(false);
 
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+
+  const triggerMobileHint = () => {
+    setShowMobileHint(true);
+    if (mobileHintTimeout.current) clearTimeout(mobileHintTimeout.current);
+    mobileHintTimeout.current = setTimeout(() => {
+      setShowMobileHint(false);
+    }, 2500);
+  };
 
   const setSourceAndMaybePlay = (src, shouldPlay) => {
     const audio = audioRef.current;
@@ -43,12 +64,14 @@ const MusicPlayer = () => {
     };
     audio.addEventListener("canplay", onCanPlay);
   };
+
   const playTrack = (index) => {
     setCurrentTrackIndex(index);
     setIsPlaying(true);
-    setInfoText("Double tap to change the music");
+    setInfoText(`Playing: ${trackNames[index]} • Double tap to change`);
     setSourceAndMaybePlay(playlist[index], true);
   };
+
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -60,9 +83,10 @@ const MusicPlayer = () => {
     } else {
       setSourceAndMaybePlay(playlist[currentTrackIndex], true);
       setIsPlaying(true);
-      setInfoText("Double tap to change the music");
+      setInfoText(`Playing: ${trackNames[currentTrackIndex]} • Double tap to change`);
     }
   };
+
   const shuffleNextTrack = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -74,11 +98,16 @@ const MusicPlayer = () => {
     } while (nextIndex === currentTrackIndex && playlist.length > 1);
 
     setCurrentTrackIndex(nextIndex);
+    if (wasPlaying) {
+      setInfoText(`Playing: ${trackNames[nextIndex]} • Double tap to change`);
+    }
     setSourceAndMaybePlay(playlist[nextIndex], wasPlaying);
   };
+
   const handleTrackEnd = () => {
     shuffleNextTrack();
   };
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -91,10 +120,21 @@ const MusicPlayer = () => {
     audio.addEventListener("error", onError);
     return () => audio.removeEventListener("error", onError);
   }, []);
+
   useEffect(() => {
     const handleVolumeKeys = (e) => {
       const audio = audioRef.current;
       if (!audio) return;
+
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target.isContentEditable ||
+        !isPlayingRef.current
+      ) {
+        return;
+      }
+
       if (e.key === "ArrowUp") {
         e.preventDefault();
         audio.volume = Math.min(1, Math.round((audio.volume + 0.05) * 100) / 100);
@@ -106,6 +146,7 @@ const MusicPlayer = () => {
     window.addEventListener("keydown", handleVolumeKeys, { passive: false });
     return () => window.removeEventListener("keydown", handleVolumeKeys);
   }, []);
+
   const handleDoubleTapMobile = () => {
     const now = Date.now();
     if (now - lastTapTime.current < 400) {
@@ -113,6 +154,7 @@ const MusicPlayer = () => {
     }
     lastTapTime.current = now;
   };
+
   const handleClick = () => {
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current);
@@ -126,9 +168,30 @@ const MusicPlayer = () => {
     }
   };
 
+  const isVisible = isHovered || showMobileHint;
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center space-y-2">
-      <p className="text-xs text-gray-300 italic">{infoText}</p>
+    <div
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-end group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsButtonHovered(false);
+      }}
+    >
+      <div
+        className={`mb-2.5 pointer-events-none transition-all duration-300 ease-out transform ${
+          isVisible
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-2 scale-95"
+        } group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100`}
+      >
+        <div className="relative px-3.5 py-1.5 rounded-full text-xs font-medium text-cyan-200 bg-neutral-900/90 backdrop-blur-md border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center gap-2 whitespace-nowrap">
+          <DynamicMusicIcon isPlaying={isPlaying} size="sm" />
+          <span>{infoText}</span>
+          <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-neutral-900/90 border-r border-b border-cyan-400/40 rotate-45" />
+        </div>
+      </div>
 
       <audio
         ref={audioRef}
@@ -139,16 +202,53 @@ const MusicPlayer = () => {
 
       <button
         onClick={handleClick}
-        onTouchStart={handleDoubleTapMobile}
-        className="p-4 rounded-full shadow-lg transition transform hover:scale-110"
+        onTouchStart={() => {
+          triggerMobileHint();
+          handleDoubleTapMobile();
+        }}
+        onMouseEnter={() => setIsButtonHovered(true)}
+        onMouseLeave={() => setIsButtonHovered(false)}
+        onFocus={() => {
+          setIsHovered(true);
+          setIsButtonHovered(true);
+        }}
+        onBlur={() => {
+          setIsHovered(false);
+          setIsButtonHovered(false);
+        }}
+        className="w-14 h-14 rounded-full shadow-lg transition transform hover:scale-110 active:scale-95 cursor-pointer relative flex items-center justify-center focus:outline-none"
         style={{
           background: "linear-gradient(135deg, #00f0ff, #00ff80)",
-          boxShadow: "0 0 15px #00f0ff, 0 0 25px #00ff80",
+          boxShadow: isPlaying
+            ? "0 0 20px #00f0ff, 0 0 35px #00ff80"
+            : "0 0 15px #00f0ff, 0 0 25px #00ff80",
           color: "white",
         }}
         aria-label={isPlaying ? "Pause music" : "Play music"}
+        title={infoText}
       >
-        {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
+        {isPlaying && (
+          <>
+            <span className="absolute inset-0 rounded-full animate-ping bg-cyan-400/25 pointer-events-none" />
+            <span className="absolute -inset-1 rounded-full animate-pulse bg-emerald-400/20 pointer-events-none" />
+            
+            <div className="pointer-events-none absolute inset-0 overflow-visible">
+              <span className="absolute -top-1 -left-2 text-cyan-200 text-sm font-bold select-none animate-floatNote1">
+                ♪
+              </span>
+              <span className="absolute -top-2 -right-2 text-emerald-200 text-xs font-bold select-none animate-floatNote2">
+                ♫
+              </span>
+            </div>
+          </>
+        )}
+
+        <DynamicMusicIcon
+          isPlaying={isPlaying}
+          isHovered={isButtonHovered}
+          size="md"
+          showPauseOnHover={true}
+        />
       </button>
     </div>
   );

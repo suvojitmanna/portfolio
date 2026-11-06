@@ -1,10 +1,25 @@
 import { FaJava, FaReact } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiTailwindcss, SiFastapi, SiPython, SiDocker, SiMongodb, SiCplusplus, SiSocketdotio, SiWebrtc, SiC, SiJavascript, SiExpress } from 'react-icons/si';
-import { DiNodejsSmall } from 'react-icons/di';
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiPython,
+  SiDocker,
+  SiMongodb,
+  SiCplusplus,
+  SiSocketdotio,
+  SiWebrtc,
+  SiC,
+  SiJavascript,
+  SiExpress
+} from 'react-icons/si';
+import {
+  DiNodejsSmall,
+  DiRedis
+} from 'react-icons/di';
 import { motion, useMotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { TbApi } from 'react-icons/tb';
-import { IoLogoJavascript } from 'react-icons/io';
 
 
 export default function Skills() {
@@ -21,6 +36,7 @@ export default function Skills() {
     { icon: <SiSocketdotio />, name: "Socket.IO" },
     { icon: <SiWebrtc />, name: "WebRTC" },
     { icon: <SiMongodb />, name: "MongoDB" },
+    { icon: <DiRedis />, name: "Redis" },
     { icon: <SiDocker />, name: "Docker" },
     { icon: <SiC />, name: "C" },
     { icon: <SiCplusplus />, name: "C++" },
@@ -100,14 +116,10 @@ export default function Skills() {
   return (
     <section id="skills"
       ref={sectionRef}
-      className="h-1/2 w-full pb-8 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden">
+      className="h-1/2 w-full pb-6 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden">
       <div className='absolute inset-0 pointer-events-none'>
-        <div className='absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse
-'/>
-        <div className='absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
-opacity-20 blur-[120px] animate-pulse delay-500
-' />
+        <div className='absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2] opacity-20 blur-[120px] animate-pulse' />
+        <div className='absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2] opacity-20 blur-[120px] animate-pulse delay-500' />
 
       </div>
 
@@ -127,7 +139,7 @@ opacity-20 blur-[120px] animate-pulse delay-500
         Modern Applications | Modern Technologies
       </motion.p>
 
-      <div className='relative w-full overflow-hidden'>
+      <div className='relative pt-2 w-full overflow-hidden'>
         <motion.div
           ref={trackRef}
           className='flex gap-10 text-6xl text-[#1cd8d2]'

@@ -9,7 +9,7 @@ import ParticleBackground from "../components/ParticlesBackground";
 const socials = [
   { Icon: FaXTwitter, label: "X", href: "https://x.com/Suvojit9093" },
   { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/suvojit-manna-505614327/" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/gauravbits/" },
+  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/suvo.jit2006/" },
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/suvojitmanna" },
 ];
 
@@ -32,7 +32,12 @@ const glowVariants = {
 
 const Home = React.forwardRef((props, ref) => {
   const roles = useMemo(
-    () => ["Software Developer", "Web Developer", "Content Creator"],
+    () => [
+      "Software Developer",
+      "MERN Stack Web Developer",
+      "AI Application Developer",
+      "Real-Time Web Application Developer",
+    ],
     []
   );
   const [index, setIndex] = useState(0);
@@ -123,14 +128,14 @@ const Home = React.forwardRef((props, ref) => {
             </motion.h1>
 
             <motion.p
-              className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
+              className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              I turn complex ideas into seamless, high-impact web experiences —
-              building modern, scalable, and lightning-fast applications that
-              make a difference.
+              I turn complex ideas into modern, scalable web applications 
+              — building fast,interactive, and real-time experiences with a focus on clean architecture,
+              seamless UX, intuitive design, and practical AI integration.
             </motion.p>
 
             <motion.div

@@ -7,10 +7,12 @@ import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
 import Experience from "./sections/Experience";
+import Education from "./sections/Education";
 import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import MusicPlayer from "./components/MusicPlayer";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function App() {
   const [introDone, setIntroDone] = useState(false);
@@ -19,6 +21,7 @@ export default function App() {
     <div className="relative animated-gradient text-white">
       <CustomCursor />
       <Navbar />
+      <ScrollProgress />
       <MusicPlayer />
       {!introDone && <IntroAnimation onFinish={() => setIntroDone(true)} />}
       <Home introDone={introDone} />
@@ -27,6 +30,7 @@ export default function App() {
       <Skills />
       <Projects />
       <Experience />
+      <Education />
       <Testimonials />
       <Contact />
       <Footer />

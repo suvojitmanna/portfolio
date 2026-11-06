@@ -56,6 +56,84 @@
   animation: floating 4s ease-in-out infinite;
 }
 
+@keyframes musicBar1 {
+  0%, 100% { height: 5px; }
+  50% { height: 20px; }
+}
+
+@keyframes musicBar2 {
+  0%, 100% { height: 18px; }
+  50% { height: 7px; }
+}
+
+@keyframes musicBar3 {
+  0%, 100% { height: 8px; }
+  50% { height: 22px; }
+}
+
+@keyframes musicBar4 {
+  0%, 100% { height: 20px; }
+  50% { height: 5px; }
+}
+
+.animate-musicBar1 {
+  animation: musicBar1 0.8s ease-in-out infinite;
+}
+
+.animate-musicBar2 {
+  animation: musicBar2 0.65s ease-in-out infinite 0.15s;
+}
+
+.animate-musicBar3 {
+  animation: musicBar3 0.9s ease-in-out infinite 0.3s;
+}
+
+.animate-musicBar4 {
+  animation: musicBar4 0.7s ease-in-out infinite 0.1s;
+}
+
+@keyframes floatMusicNote1 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) translateX(0) scale(0.6) rotate(0deg);
+  }
+  30% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34px) translateX(-12px) scale(1.1) rotate(-20deg);
+  }
+}
+
+@keyframes floatMusicNote2 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) translateX(0) scale(0.6) rotate(0deg);
+  }
+  30% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-38px) translateX(14px) scale(1.15) rotate(20deg);
+  }
+}
+
+.animate-floatNote1 {
+  animation: floatMusicNote1 2.4s ease-in-out infinite;
+}
+
+.animate-floatNote2 {
+  animation: floatMusicNote2 2.8s ease-in-out infinite 1.2s;
+}
+
 
 
 @media (max-width: 640px) {
@@ -63,3 +141,16 @@
     overflow-x: clip;
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body * {
+    cursor: none;
+  }
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
