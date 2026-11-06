@@ -160,9 +160,6 @@ export default function Navbar() {
           </div>
           <div className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-1.5">
             <span>Suvojit</span>
-            <span className="text-xs px-2 py-0.5 rounded-full font-mono bg-white/5 border border-white/10 text-[#1CD8D2] font-semibold hidden sm:inline-block">
-              DEV
-            </span>
           </div>
         </motion.a>
 

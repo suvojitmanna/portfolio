@@ -11,7 +11,7 @@ import {
 const socials = [
   { Icon: FaXTwitter, label: "X", href: "https://x.com/Suvojit9093" },
   { Icon: FaLinkedinIn, label: "LinkedIn", href: "https://www.linkedin.com/in/suvojit-manna-505614327/" },
-  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/gauravbits/" },
+  { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/suvo.jit2006/" },
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/suvojitmanna" },
 ];
 

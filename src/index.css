@@ -56,7 +56,6 @@
   animation: floating 4s ease-in-out infinite;
 }
 
-/* Dynamic Equalizer Bar Animations */
 @keyframes musicBar1 {
   0%, 100% { height: 5px; }
   50% { height: 20px; }
@@ -93,7 +92,6 @@
   animation: musicBar4 0.7s ease-in-out infinite 0.1s;
 }
 
-/* Floating Music Notes */
 @keyframes floatMusicNote1 {
   0% {
     opacity: 0;
@@ -143,3 +141,16 @@
     overflow-x: clip;
   }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body * {
+    cursor: none;
+  }
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
