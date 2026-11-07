@@ -63,11 +63,11 @@ const Home = React.forwardRef((props, ref) => {
     <section
       ref={ref}
       id="home"
-      className="h-screen w-full relative overflow-hidden bg-black"
+      className="min-h-screen w-full relative overflow-hidden bg-black flex items-center lg:pl-40 py-20 sm:py-24 lg:py-0 pr-2 -pl-5 sm:pl-0 sm:pr-0"
     >
       <ParticleBackground />
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute -top-32 -left-32 
           w-[70vw] sm:w-[50vw] md:w-[40vw] 
@@ -92,16 +92,16 @@ const Home = React.forwardRef((props, ref) => {
         />
       </div>
 
-      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 lg:grid-cols-2 items-center">
         <motion.div
-          className="flex flex-col justify-center h-full text-center lg:text-left relative"
+          className="flex flex-col justify-center text-center lg:text-left relative py-6 lg:py-0"
           initial={{ opacity: 0, y: 120 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
+          <div className="w-full lg:pr-12 xl:pr-24 mx-auto max-w-[48rem]">
             <motion.div
-              className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
+              className="pt-20 sm:mb-3 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
@@ -109,44 +109,44 @@ const Home = React.forwardRef((props, ref) => {
               <span>{roles[index].substring(0, subIndex)}</span>
               <span
                 className="inline-block w-[2px] ml-1 bg-white animate-pulse align-middle"
-                style={{ height: "1em" }}
+                style={{ height: "0.5em" }}
               />
             </motion.div>
 
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text 
-              bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-transparent bg-clip-text 
+              bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] drop-shadow-lg leading-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
               Hello, I&apos;m
               <br />
-              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap">
+              <span className="text-white font-bold text-4xl sm:text-6xl md:text-7xl lg:text-7xl block break-words lg:whitespace-nowrap">
                 Suvojit Manna
               </span>
             </motion.h1>
 
             <motion.p
-              className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto lg:mx-0"
+              className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              I turn complex ideas into modern, scalable web applications 
+              I turn complex ideas into modern, scalable web applications <br />
               — building fast,interactive, and real-time experiences with a focus on clean architecture,
               seamless UX, intuitive design, and practical AI integration.
             </motion.p>
 
             <motion.div
-              className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6"
+              className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.8 }}
             >
               <a
                 href="#projects"
-                className="px-6 py-3 rounded-full text-lg font-medium text-white 
+                className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-base sm:text-lg font-medium text-white 
                 bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63]
                 shadow-lg hover:scale-105 transition-all"
               >
@@ -155,7 +155,7 @@ const Home = React.forwardRef((props, ref) => {
               <a
                 href="/Resume.pdf"
                 download
-                className="px-6 py-3 rounded-full text-lg font-medium text-black bg-white 
+                className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-base sm:text-lg font-medium text-black bg-white 
                 hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
               >
                 My Resume
@@ -163,16 +163,17 @@ const Home = React.forwardRef((props, ref) => {
             </motion.div>
 
             <motion.div
-              className="mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start"
+              className="mt-6 sm:mt-10 flex gap-4 sm:gap-5 text-xl sm:text-2xl md:text-3xl justify-center lg:justify-start"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
             >
-              {socials.map(({ Icon, label, href }) => (
+              {socials.map(({Icon, label, href }) => (
                 <motion.a
                   key={label}
                   href={href}
                   aria-label={label}
+                  data-cursor="icon"
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={glowVariants}

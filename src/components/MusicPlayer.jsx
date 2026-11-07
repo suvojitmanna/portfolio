@@ -217,6 +217,7 @@ const MusicPlayer = () => {
           setIsButtonHovered(false);
         }}
         className="w-14 h-14 rounded-full shadow-lg transition transform hover:scale-110 active:scale-95 cursor-pointer relative flex items-center justify-center focus:outline-none"
+        data-cursor="icon"
         style={{
           background: "linear-gradient(135deg, #00f0ff, #00ff80)",
           boxShadow: isPlaying

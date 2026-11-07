@@ -150,7 +150,7 @@ export default function ScrollProgress() {
 
   return (
     <div
-      className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-40 select-none flex flex-col items-center"
+      className="fixed right-0 sm:right-4 top-1/2 -translate-y-1/2 z-40 select-none flex flex-col items-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="region"
@@ -158,6 +158,7 @@ export default function ScrollProgress() {
     >
       <button
         onClick={scrollToTop}
+        data-cursor="icon"
         className="mb-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to top"
         title="Scroll to top"
@@ -228,6 +229,7 @@ export default function ScrollProgress() {
 
       <button
         onClick={scrollToBottom}
+        data-cursor="icon"
         className="mt-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to bottom"
         title="Scroll to bottom"
