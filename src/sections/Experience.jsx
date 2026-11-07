@@ -110,7 +110,7 @@ const Experience = () => {
     <section id="experience" className="relative bg-black text-white">
       <div ref={sceneRef} style={{ height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh" }} className="relative">
         <div className="sticky top-0 h-screen flex flex-col justify-between py-4 sm:py-6">
-          <div className="shrink-0 px-4 sm:px-6 pt-2 sm:pt-4">
+          <div className="shrink-0 px-4 sm:px-6 pt-2 sm:-mt-15 sm:p-15">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-center">Experience</h2>
           </div>
           <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-2 sm:py-4 lg:py-8">
