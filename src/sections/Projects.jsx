@@ -54,7 +54,6 @@ export default function Projects() {
   );
 
   const sceneRef = React.useRef(null);
-
   const { scrollYProgress } = useScroll({
     target: sceneRef,
     offset: ["start start", "end end"],
@@ -111,7 +110,6 @@ export default function Projects() {
                   </MH3>
                 )}
               </AnimatePresence>
-
               <div
                 className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] mt-10 sm:ml-15 ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
                   } h-[62vh] sm:h-[78vh] w-[62vh] sm:w-[150vh]`}

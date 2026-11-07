@@ -168,7 +168,7 @@ const Home = React.forwardRef((props, ref) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
             >
-              {socials.map(({ Icon, label, href }) => (
+              {socials.map(({Icon, label, href }) => (
                 <motion.a
                   key={label}
                   href={href}
