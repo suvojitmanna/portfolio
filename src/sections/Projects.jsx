@@ -48,7 +48,7 @@ export default function Projects() {
       {
         title: "Interview-IQ",
         link: "https://ai-interview-two-sigma.vercel.app/",
-        bgColor: isMobile ? "#08122d" : "#312e81",
+        bgColor: isMobile ? "#08122d" : "#140f41",
         image: isMobile ? photo3 : img3,
       },
     ],
