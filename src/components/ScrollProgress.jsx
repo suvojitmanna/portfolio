@@ -158,6 +158,7 @@ export default function ScrollProgress() {
     >
       <button
         onClick={scrollToTop}
+        data-cursor="icon"
         className="mb-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to top"
         title="Scroll to top"
@@ -228,6 +229,7 @@ export default function ScrollProgress() {
 
       <button
         onClick={scrollToBottom}
+        data-cursor="icon"
         className="mt-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to bottom"
         title="Scroll to bottom"

@@ -1,7 +1,8 @@
 import React from "react";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
+import { FiArrowUpRight } from "react-icons/fi";
 import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.JPG";
+import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.JPG";
 import photo1 from "../assets/photo1.JPG";
 import photo2 from "../assets/photo2.PNG";
@@ -34,13 +35,13 @@ export default function Projects() {
       {
         title: "Whatsapp-Clone",
         link: "https://whatsapp-gilt-alpha.vercel.app/",
-        bgColor: "#0d4d3d",
+        bgColor: "#075e54",
         image: isMobile ? photo1 : img1,
       },
       {
         title: "Live-classes",
         link: "https://live-classes.vercel.app/",
-        bgColor: "#3884d3",
+        bgColor: "#4c1d95",
         image: isMobile ? photo2 : img2,
       },
       {
@@ -83,10 +84,10 @@ export default function Projects() {
       }}
     >
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-        <h2 className={`text-3xl font-semibold z-10 text-center ${isMobile ? "mt-4" : "mt-2"}`}>
+        <h2 className={`text-3xl font-semibold z-10 text-center ${isMobile ? "mt-2" : "mt-2"}`}>
           My Work
         </h2>
-        <div className={`relative w-full flex-1 flex items-center justify-center ${isMobile ? "-mt-4" : "-mt-8"}`}>
+        <div className={`relative w-full flex-1 flex items-center justify-center ${isMobile ? "-mt-8" : "-mt-8"}`}>
           {projects.map((project, idx) => (
             <div
               key={project.title}
@@ -102,7 +103,7 @@ export default function Projects() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 30 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`block text-center text-[clamp(2rem,5vw,4rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold ${isMobile ? "-mt-25" : "mt-13"
+                    className={`block text-center text-[clamp(2rem,5vw,4rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold ${isMobile ? "-mt-5" : "mt-6"
                       }`}
                     style={{ zIndex: 5, textAlign: isMobile ? "center" : "left" }}
                   >
@@ -111,19 +112,23 @@ export default function Projects() {
                 )}
               </AnimatePresence>
               <div
-                className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] mt-10 sm:ml-15 ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
-                  } h-[62vh] sm:h-[78vh] w-[62vh] sm:w-[150vh]`}
-                style={{ zIndex: 10, transition: "box-shadow 250ms ease" }}
+                className={`relative w-full overflow-hidden bg-black/20 mt-3 sm:ml-15 ${isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-1 rounded-xl"
+                  } h-[79vh] sm:h-[78vh] w-[62vh] sm:w-[150vh]`}
+                style={{
+                  zIndex: 10,
+                  boxShadow: `0 30px 70px -15px ${project.bgColor}, 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 50px ${project.bgColor}40`,
+                  transition: "box-shadow 400ms ease",
+                }}
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover drop-shadow-xl md:drop-shadow-2xl"
+                  className="w-full h-full object-cover"
                   style={{
                     position: "relative",
                     zIndex: 10,
-                    filter: "drop-shadow(0 16px 40px rgba(0,0,0,0.65))",
-                    transition: "filter 200ms ease",
+                    filter: `drop-shadow(0 20px 35px ${project.bgColor}) drop-shadow(0 12px 25px rgba(0,0,0,0.65))`,
+                    transition: "filter 350ms ease",
                   }}
                   loading="lazy"
                 />
@@ -139,16 +144,22 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className={`absolute ${isMobile ? "bottom-20" : "bottom-5"}`}>
-          <a
+        <div className={`absolute z-30 flex items-center justify-center ${isMobile ? "bottom-7" : "bottom-5 sm:bottom-3"}`}>
+          <motion.a
             href={activeProject?.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-2.5 font-semibold rounded-xl bg-white text-black hover:bg-gray-200 transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            className={`group flex items-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 font-semibold rounded-full bg-white text-black hover:bg-white/95 transition-all duration-300 text-sm sm:text-base cursor-pointer shadow-lg ${isMobile ? "-mt-5" : ""}`}
+            style={{
+              boxShadow: `0 12px 30px -5px ${activeProject.bgColor}90, 0 8px 20px -6px rgba(0,0,0,0.6)`,
+            }}
             aria-label={`View ${activeProject?.title}`}
           >
-            View Project
-          </a>
+            <span>View Project</span>
+            <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </motion.a>
         </div>
       </div>
     </section>

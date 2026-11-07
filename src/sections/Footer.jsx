@@ -62,6 +62,7 @@ const Footer = () => {
               key={label}
               href={href}
               aria-label={label}
+              data-cursor="icon"
               target="_blank"
               rel="noopener noreferrer"
               variants={glowVariants}
