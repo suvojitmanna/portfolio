@@ -2,30 +2,21 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const [cursorState, setCursorState] = useState("default"); // "default" | "pointer" | "icon" | "text"
+  const [cursorState, setCursorState] = useState("default");
   const [isClicked, setIsClicked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [ripples, setRipples] = useState([]);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  // Raw mouse coordinates
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
-
-  // 1. Ultra-responsive precision dot (nearly instant)
   const dotX = useSpring(mouseX, { damping: 48, stiffness: 1400, mass: 0.08 });
   const dotY = useSpring(mouseY, { damping: 48, stiffness: 1400, mass: 0.08 });
-
-  // 2. Smooth elastic follower ring
   const ringX = useSpring(mouseX, { damping: 26, stiffness: 260, mass: 0.45 });
   const ringY = useSpring(mouseY, { damping: 26, stiffness: 260, mass: 0.45 });
-
-  // 3. Ambient atmospheric glow (soft trailing aura)
   const glowX = useSpring(mouseX, { damping: 36, stiffness: 120, mass: 0.8 });
   const glowY = useSpring(mouseY, { damping: 36, stiffness: 120, mass: 0.8 });
 
   useEffect(() => {
-    // Detect touch / mobile devices where custom cursor should be disabled
     const isTouch =
       "ontouchstart" in window ||
       navigator.maxTouchPoints > 0 ||
@@ -38,8 +29,6 @@ export default function CustomCursor() {
 
     const updateCursorStateFromTarget = (target) => {
       if (!target || !(target instanceof Element)) return;
-
-      // Text input detection
       const isTextInput = Boolean(
         target.closest(
           'input:not([type="submit"]):not([type="button"]), textarea, [contenteditable="true"]'
@@ -51,13 +40,11 @@ export default function CustomCursor() {
         return;
       }
 
-      // Clickable element detection
       const clickableEl = target.closest(
         'a, button, [role="button"], input[type="submit"], input[type="button"], .cursor-pointer, [data-cursor]'
       );
 
       if (clickableEl) {
-        // Icon detection: SVG, path, explicit data-cursor="icon", or icon-only buttons
         const isSvgTarget = Boolean(
           target.closest("svg") ||
           target.tagName.toLowerCase() === "svg" ||
@@ -84,7 +71,6 @@ export default function CustomCursor() {
           setCursorState("icon");
           return;
         }
-
         setCursorState("pointer");
         return;
       }
@@ -109,19 +95,15 @@ export default function CustomCursor() {
       };
       setRipples((prev) => [...prev.slice(-3), newRipple]);
     };
-
     const handleMouseUp = () => {
       setIsClicked(false);
     };
-
     const handleMouseOver = (e) => {
       updateCursorStateFromTarget(e.target);
     };
-
     const handleMouseLeave = () => {
       setIsVisible(false);
     };
-
     const handleMouseEnter = () => {
       setIsVisible(true);
     };
@@ -142,13 +124,10 @@ export default function CustomCursor() {
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
   }, [mouseX, mouseY, cursorState]);
-
-  // Completely bypass on mobile/touch screens
   if (isTouchDevice) return null;
 
   return (
     <>
-      {/* Ambient Atmospheric Cosmic Glow */}
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9990] -translate-x-1/2 -translate-y-1/2"
         style={{
@@ -164,22 +143,17 @@ export default function CustomCursor() {
           transition: "opacity 0.3s ease",
         }}
       >
-        <div
-          className={`rounded-full bg-gradient-to-tr from-[#1CD8D2]/30 via-[#00bf8f]/25 to-[#302b63]/20 blur-3xl transition-all duration-300 ${
-            cursorState === "icon" ? "w-80 h-80" : "w-72 h-72"
+        <div className={`rounded-full bg-gradient-to-tr from-[#1CD8D2]/30 via-[#00bf8f]/25 to-[#302b63]/20 blur-3xl transition-all duration-300 ${cursorState === "icon" ? "w-80 h-80" : "w-72 h-72"
           }`}
         />
       </motion.div>
-
-      {/* Tactile Click Wave Ripples */}
       {ripples.map((ripple) => (
         <motion.div
           key={ripple.id}
-          className={`pointer-events-none fixed top-0 left-0 rounded-full z-[9995] ${
-            ripple.isIcon
-              ? "border-2 border-emerald-400 shadow-[0_0_15px_#00bf8f]"
-              : "border border-[#1CD8D2]"
-          }`}
+          className={`pointer-events-none fixed top-0 left-0 rounded-full z-[9995] ${ripple.isIcon
+            ? "border-2 border-emerald-400 shadow-[0_0_15px_#00bf8f]"
+            : "border border-[#1CD8D2]"
+            }`}
           style={{
             left: ripple.x,
             top: ripple.y,
@@ -200,7 +174,6 @@ export default function CustomCursor() {
         />
       ))}
 
-      {/* Follower Outer Halo / Icon Focus Reticle */}
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9998] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
         style={{
@@ -252,10 +225,8 @@ export default function CustomCursor() {
           }}
           className="w-9 h-9 rounded-full border backdrop-blur-[1.5px] relative flex items-center justify-center"
         >
-          {/* SPECIAL ICON CLICKABLE STATE: 4 HUD Corner Reticle Brackets + Dual Orbit */}
           {cursorState === "icon" && (
             <>
-              {/* 4 Precision Corner HUD Brackets */}
               <motion.span
                 initial={{ opacity: 0, scale: 0.6 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -276,15 +247,11 @@ export default function CustomCursor() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="absolute -bottom-1.5 -right-1.5 w-2 h-2 border-b-2 border-r-2 border-cyan-300 pointer-events-none"
               />
-
-              {/* Spinning Dashed Aperture Ring */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
                 className="absolute -inset-1.5 rounded-full border border-dashed border-emerald-400/80 pointer-events-none"
               />
-
-              {/* Dual Counter-Orbiting Satellites */}
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ repeat: Infinity, duration: 2.8, ease: "linear" }}
@@ -296,7 +263,6 @@ export default function CustomCursor() {
             </>
           )}
 
-          {/* Standard Button / Link Hover: Single Orbit Satellite */}
           {cursorState === "pointer" && (
             <motion.div
               animate={{ rotate: 360 }}
@@ -309,7 +275,6 @@ export default function CustomCursor() {
         </motion.div>
       </motion.div>
 
-      {/* Ultra-Precision Inner Core Dot (Morphs to Diamond on Icons) */}
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9999] -translate-x-1/2 -translate-y-1/2"
         style={{
