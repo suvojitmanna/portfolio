@@ -122,9 +122,9 @@ function EducationCard({ item, isFeatured = false }) {
       whileHover={{ y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-7 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] backdrop-blur-2xl border flex flex-col justify-between overflow-hidden group transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.5)] ${isFeatured
-        ? "border-[#1CD8D2]/45 hover:border-[#1CD8D2]/70 shadow-[0_15px_45px_rgba(28,216,210,0.16)] min-h-[380px] sm:min-h-[420px]"
-        : "border-white/10 hover:border-[#1CD8D2]/50 hover:shadow-[0_15px_40px_rgba(28,216,210,0.12)] min-h-[350px] sm:min-h-[420px]"
+      className={`relative rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-7 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] backdrop-blur-2xl border flex flex-col justify-between overflow-hidden group transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.5)] ${isFeatured
+        ? "border-[#1CD8D2]/45 hover:border-[#1CD8D2]/70 shadow-[0_15px_45px_rgba(28,216,210,0.16)] min-h-0 sm:min-h-[380px] lg:min-h-[420px]"
+        : "border-white/10 hover:border-[#1CD8D2]/50 hover:shadow-[0_15px_40px_rgba(28,216,210,0.12)] min-h-0 md:min-h-[360px] lg:min-h-[400px]"
         }`}
     >
       <motion.div
@@ -134,21 +134,21 @@ function EducationCard({ item, isFeatured = false }) {
 
       <div className="absolute top-0 left-0 right-0 h-[2px] sm:h-[2.5px] bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-transparent opacity-90" />
       <div className="relative z-10 flex-1 flex flex-col">
-        <div className="flex items-center justify-between gap-2.5 mb-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1CD8D2]/20 via-[#00bf8f]/15 to-[#302b63]/30 border border-[#1CD8D2]/35 flex items-center justify-center text-[#1CD8D2] shadow-[0_0_15px_rgba(28,216,210,0.25)] shrink-0">
-              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
+        <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#1CD8D2]/20 via-[#00bf8f]/15 to-[#302b63]/30 border border-[#1CD8D2]/35 flex items-center justify-center text-[#1CD8D2] shadow-[0_0_15px_rgba(28,216,210,0.25)] shrink-0">
+              <IconComponent className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#1CD8D2] font-bold">
+              <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-[#1CD8D2] font-bold">
                 {item.category}
               </span>
-              <p className="text-[11px] sm:text-xs text-gray-400 font-medium">{item.duration}</p>
+              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">{item.duration}</p>
             </div>
           </div>
 
           {item.isCurrent ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/35 shadow-[0_0_12px_rgba(16,185,129,0.25)] shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/35 shadow-[0_0_12px_rgba(16,185,129,0.25)] shrink-0">
               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500" />
@@ -156,32 +156,32 @@ function EducationCard({ item, isFeatured = false }) {
               Active Program
             </span>
           ) : (
-            <span className="inline-flex items-center text-[10px] sm:text-[11px] font-medium text-gray-300 px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 border border-white/10 shrink-0">
+            <span className="inline-flex items-center text-[9px] sm:text-[11px] font-medium text-gray-300 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 border border-white/10 shrink-0">
               Graduated
             </span>
           )}
         </div>
-        <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white group-hover:text-[#1CD8D2] transition-colors leading-snug mb-1">
+        <h3 className="text-sm sm:text-xl md:text-2xl font-extrabold text-white group-hover:text-[#1CD8D2] transition-colors leading-snug mb-0.5 sm:mb-1">
           {item.degree}
         </h3>
-        <p className="text-xs sm:text-sm font-semibold text-gray-200">
+        <p className="text-[11px] sm:text-sm font-semibold text-gray-200">
           {item.institution}
         </p>
-        <p className="text-[11px] sm:text-xs text-gray-400 mb-2.5">{item.affiliation}</p>
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#1CD8D2]/15 via-[#00bf8f]/10 to-[#302b63]/20 border border-[#1CD8D2]/35 text-xs sm:text-sm font-mono text-[#1CD8D2] shadow-[0_0_12px_rgba(28,216,210,0.12)] mb-2.5 self-start">
-          <FaStar className="w-3 h-3 text-[#00bf8f]" />
+        <p className="text-[10px] sm:text-xs text-gray-400 mb-1.5 sm:mb-2.5">{item.affiliation}</p>
+        <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-xl bg-gradient-to-r from-[#1CD8D2]/15 via-[#00bf8f]/10 to-[#302b63]/20 border border-[#1CD8D2]/35 text-[11px] sm:text-sm font-mono text-[#1CD8D2] shadow-[0_0_12px_rgba(28,216,210,0.12)] mb-1.5 sm:mb-2.5 self-start">
+          <FaStar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#00bf8f]" />
           <span className="font-bold">{item.score}</span>
         </div>
 
-        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light mb-3 line-clamp-3 sm:line-clamp-none">
+        <p className="text-[11px] sm:text-sm text-gray-300 leading-snug sm:leading-relaxed font-light mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-none">
           {item.description}
         </p>
 
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2.5 mt-auto border-t border-white/10">
+        <div className="flex flex-wrap gap-1 sm:gap-2 pt-2 sm:pt-2.5 mt-auto border-t border-white/10">
           {item.highlights.map((tag, tIdx) => (
             <span
               key={tIdx}
-              className="text-[10px] sm:text-xs px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-white/[0.05] border border-white/10 text-gray-200 font-medium group-hover:border-[#1CD8D2]/30 transition-colors"
+              className="text-[9px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded sm:rounded-lg bg-white/[0.05] border border-white/10 text-gray-200 font-medium group-hover:border-[#1CD8D2]/30 transition-colors"
             >
               {tag}
             </span>
@@ -189,7 +189,7 @@ function EducationCard({ item, isFeatured = false }) {
         </div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs text-gray-400 pt-2.5 mt-3 border-t border-white/10">
+      <div className="relative z-10 flex items-center justify-between text-[10px] sm:text-xs text-gray-400 pt-2 sm:pt-2.5 mt-2 sm:mt-3 border-t border-white/10">
         <span className="flex items-center gap-1">
           <FaCalendarAlt className="w-2.5 h-2.5 text-[#1CD8D2]" />
           {item.duration}
@@ -252,7 +252,7 @@ export default function Education() {
         style={{ height: "260vh", minHeight: "150vh" }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden px-4 sm:px-6 md:px-10 py-4 sm:py-6 md:py-7">
+        <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden px-3 sm:px-6 md:px-10 py-2 sm:py-5 md:py-7">
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute top-1/4 -left-20 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1CD8D2] opacity-20 blur-[140px]" />
             <div className="absolute bottom-1/4 -right-20 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] opacity-15 blur-[140px]" />
@@ -274,8 +274,8 @@ export default function Education() {
               Education
             </h2>
           </div>
-          <div className="relative z-10 w-full max-w-xl mx-auto my-2 sm:my-3 shrink-0">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2">
+          <div className="relative z-10 w-full max-w-xl mx-auto my-1.5 sm:my-3 shrink-0">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
               <button
                 onClick={() => scrollToStage(1)}
                 className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 1
@@ -306,9 +306,6 @@ export default function Education() {
               />
             </div>
           </div>
-          <div className="relative z-20 w-full max-w-xl mx-auto mt-2 mb-3 sm:mb-4 px-2">
-            <div className="flex items-center justify-center gap-2 sm:gap-4" />
-          </div>
           <div className="relative z-10 flex-1 flex items-center justify-center w-full max-w-6xl mx-auto min-h-0 px-2 sm:px-4">
             <motion.div
               style={{
@@ -326,7 +323,7 @@ export default function Education() {
                   isFeatured={true}
                 />
               </div>
-              <div className="mt-4 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#1CD8D2] font-medium">
+              <div className="mt-2.5 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#1CD8D2] font-medium">
                 <span>
                   Scroll down to slide to Both Schools
                 </span>
@@ -358,7 +355,7 @@ export default function Education() {
               }}
               className="absolute inset-0 flex flex-col items-center justify-center w-full px-2 sm:px-4">
 
-              <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-7 items-stretch">
+              <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-7 items-stretch">
                 {schoolData.map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -403,7 +400,7 @@ export default function Education() {
                   delay: 0.35,
                   duration: 0.4,
                 }}
-                className="mt-3 sm:mt-4 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-[#00bf8f] font-medium text-center px-2">
+                className="mt-2 sm:mt-4 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-[#00bf8f] font-medium text-center px-2">
                 <IoSparkles className="w-3 h-3 text-[#1CD8D2] shrink-0" />
                 <span>
                   Foundational Schooling: 10+2 Science & Secondary 10th
