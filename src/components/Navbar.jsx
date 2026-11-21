@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import gsap from "gsap";
 import OverlayMenu from "./OverlayMenu";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -17,37 +17,17 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [forceVisible, setForceVisible] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredLink, setHoveredLink] = useState(null);
-
-  const lastScrollY = useRef(0);
-  const timerId = useRef(null);
   const mobileMenuBtnRef = useRef(null);
+  const { scrollYProgress } = useScroll();
 
-  useEffect(() => {
-    const homeSection = document.querySelector("#home");
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setForceVisible(true);
-          setVisible(true);
-        } else {
-          setForceVisible(false);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (homeSection) observer.observe(homeSection);
-
-    return () => {
-      if (homeSection) observer.unobserve(homeSection);
-    };
-  }, []);
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const sections = [
@@ -77,31 +57,13 @@ export default function Navbar() {
           }
         }
       }
-
-      if (forceVisible) {
-        setVisible(true);
-        return;
-      }
-
-      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-        if (timerId.current) clearTimeout(timerId.current);
-        timerId.current = setTimeout(() => {
-          if (window.scrollY > 120) setVisible(false);
-        }, 3200);
-      }
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timerId.current) clearTimeout(timerId.current);
     };
-  }, [forceVisible]);
+  }, []);
 
   const handleMobileMenuMouseMove = (e) => {
     if (!mobileMenuBtnRef.current) return;
@@ -131,18 +93,16 @@ export default function Navbar() {
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{
           duration: 0.4,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className={`fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 md:px-10 py-3 sm:py-3.5 z-50 transition-colors duration-300 ${isScrolled
+        className={`fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 md:px-10 py-3 sm:py-3.5 z-50 transition-colors duration-300 ${
+          isScrolled
             ? "bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             : "bg-transparent border-b border-transparent"
-          }`}
+        }`}
       >
         <motion.a
           href="#home"
@@ -175,10 +135,11 @@ export default function Navbar() {
                     href={item.href}
                     onMouseEnter={() => setHoveredLink(item.name)}
                     onMouseLeave={() => setHoveredLink(null)}
-                    className={`relative z-10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 block ${isActive
+                    className={`relative z-10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 block ${
+                      isActive
                         ? "text-white font-bold"
                         : "text-gray-400 hover:text-white"
-                      }`}
+                    }`}
                   >
                     {item.name}
 
@@ -194,7 +155,11 @@ export default function Navbar() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 28 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 28,
+                      }}
                     />
                   )}
                 </li>
@@ -240,6 +205,13 @@ export default function Navbar() {
               </span>
             </motion.button>
           </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/5 overflow-hidden pointer-events-none">
+          <motion.div
+            style={{ scaleX }}
+            className="h-full bg-gradient-to-r from-[#00f0ff] via-[#1CD8D2] to-[#00ff80] origin-left shadow-[0_0_10px_rgba(0,240,255,0.8),0_0_20px_rgba(0,255,128,0.4)]"
+          />
         </div>
       </motion.nav>
 
