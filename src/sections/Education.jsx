@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -206,6 +206,16 @@ function EducationCard({ item, isFeatured = false }) {
 export default function Education() {
   const sceneRef = useRef(null);
   const [activeStage, setActiveStage] = useState(1);
+  const [mobileStage, setMobileStage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sceneRef,
     offset: ["start start", "end end"],
@@ -223,6 +233,13 @@ export default function Education() {
     } else {
       if (activeStage !== 2) setActiveStage(2);
     }
+    if (latest < 0.35) {
+      if (mobileStage !== 1) setMobileStage(1);
+    } else if (latest < 0.70) {
+      if (mobileStage !== 2) setMobileStage(2);
+    } else {
+      if (mobileStage !== 3) setMobileStage(3);
+    }
   });
 
   const lineWidth = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
@@ -234,6 +251,29 @@ export default function Education() {
   const schoolsOpacity = useTransform(smoothProgress, [0.44, 0.68], [0, 1]);
   const schoolsScale = useTransform(smoothProgress, [0.42, 0.72], [0.88, 1]);
   const schoolsRotateY = useTransform(smoothProgress, [0.42, 0.72], [-10, 0]);
+  const mCard1X = useTransform(smoothProgress, [0.22, 0.38], ["0%", "-115%"]);
+  const mCard1Opacity = useTransform(smoothProgress, [0.24, 0.36], [1, 0]);
+  const mCard1Scale = useTransform(smoothProgress, [0.22, 0.38], [1, 0.9]);
+
+  const mCard2X = useTransform(
+    smoothProgress,
+    [0.24, 0.38, 0.58, 0.72],
+    ["115%", "0%", "0%", "-115%"]
+  );
+  const mCard2Opacity = useTransform(
+    smoothProgress,
+    [0.26, 0.36, 0.60, 0.70],
+    [0, 1, 1, 0]
+  );
+  const mCard2Scale = useTransform(
+    smoothProgress,
+    [0.24, 0.38, 0.58, 0.72],
+    [0.9, 1, 1, 0.9]
+  );
+
+  const mCard3X = useTransform(smoothProgress, [0.58, 0.72], ["115%", "0%"]);
+  const mCard3Opacity = useTransform(smoothProgress, [0.60, 0.70], [0, 1]);
+  const mCard3Scale = useTransform(smoothProgress, [0.58, 0.72], [0.9, 1]);
 
   const scrollToStage = (stage) => {
     if (!sceneRef.current) return;
@@ -241,7 +281,17 @@ export default function Education() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const sceneTop = rect.top + scrollTop;
     const sceneHeight = rect.height - window.innerHeight;
-    const target = sceneTop + (stage === 1 ? 0.08 : 0.85) * sceneHeight;
+
+    let targetFraction = 0.08;
+    if (isMobile) {
+      if (stage === 1) targetFraction = 0.08;
+      else if (stage === 2) targetFraction = 0.50;
+      else if (stage === 3) targetFraction = 0.88;
+    } else {
+      targetFraction = stage === 1 ? 0.08 : 0.85;
+    }
+
+    const target = sceneTop + targetFraction * sceneHeight;
     window.scrollTo({ top: target, behavior: "smooth" });
   };
 
@@ -249,22 +299,23 @@ export default function Education() {
     <section id="education" className="relative bg-black text-white">
       <div
         ref={sceneRef}
-        style={{ height: "260vh", minHeight: "150vh" }}
+        style={{ height: isMobile ? "300vh" : "260vh", minHeight: "150vh" }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden px-3 sm:px-6 md:px-10 py-2 sm:py-5 md:py-7">
+        <div className="sticky top-0 h-[100dvh] flex flex-col justify-between overflow-hidden px-3 sm:px-6 md:px-10 pt-[72px] sm:pt-20 md:pt-22 pb-2 sm:pb-4">
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute top-1/4 -left-20 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1CD8D2] opacity-20 blur-[140px]" />
             <div className="absolute bottom-1/4 -right-20 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] opacity-15 blur-[140px]" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
           </div>
-          <div className="relative z-10 shrink-0 text-center max-w-2xl mx-auto pt-1 sm:pt-2">
+
+          <div className="relative z-10 shrink-0 text-center max-w-2xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: -8 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)] mt-14 sm:mt-10"
+              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)]"
             >
               <IoSparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00bf8f]" />
               <span>Academic Progression</span>
@@ -274,31 +325,84 @@ export default function Education() {
               Education
             </h2>
           </div>
-          <div className="relative z-10 w-full max-w-xl mx-auto my-1.5 sm:my-3 shrink-0">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
-              <button
-                onClick={() => scrollToStage(1)}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 1
-                  ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
-                  : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
-                  }`}
-              >
-                <span className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"}`} />
-                <span>01 • College</span>
-              </button>
 
-              <button
-                onClick={() => scrollToStage(2)}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 2
-                  ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/50 shadow-[0_0_15px_rgba(0,191,143,0.25)]"
-                  : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
-                  }`}
-              >
-                <span className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"}`} />
-                <span className="sm:hidden">02 • Schools</span>
-                <span className="hidden sm:inline">02 • Both Schools (10+2 & 10th)</span>
-              </button>
-            </div>
+          <div className="relative z-10 w-full max-w-xl mx-auto my-1.5 sm:my-2.5 shrink-0">
+            {isMobile ? (
+              <div className="flex items-center justify-center gap-1.5 mb-1.5 sm:mb-2">
+                <button
+                  onClick={() => scrollToStage(1)}
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 1
+                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
+                    : "text-gray-400 bg-white/5 border border-white/5"
+                    }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                      }`}
+                  />
+                  <span>01 • College</span>
+                </button>
+
+                <button
+                  onClick={() => scrollToStage(2)}
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 2
+                    ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/50 shadow-[0_0_12px_rgba(0,191,143,0.25)] font-bold"
+                    : "text-gray-400 bg-white/5 border border-white/5"
+                    }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
+                      }`}
+                  />
+                  <span>02 • 10+2</span>
+                </button>
+
+                <button
+                  onClick={() => scrollToStage(3)}
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 3
+                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
+                    : "text-gray-400 bg-white/5 border border-white/5"
+                    }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 3 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                      }`}
+                  />
+                  <span>03 • 10th</span>
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
+                <button
+                  onClick={() => scrollToStage(1)}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 1
+                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
+                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                    }`}
+                >
+                  <span
+                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                      }`}
+                  />
+                  <span>01 • College</span>
+                </button>
+
+                <button
+                  onClick={() => scrollToStage(2)}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 2
+                    ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/50 shadow-[0_0_15px_rgba(0,191,143,0.25)]"
+                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                    }`}
+                >
+                  <span
+                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
+                      }`}
+                  />
+                  <span>02 • Both Schools (10+2 & 10th)</span>
+                </button>
+              </div>
+            )}
+
             <div className="relative h-[2.5px] sm:h-[3px] bg-white/10 rounded-full overflow-hidden max-w-sm sm:max-w-md mx-auto">
               <motion.div
                 className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] shadow-[0_0_12px_#1CD8D2] origin-left"
@@ -306,108 +410,182 @@ export default function Education() {
               />
             </div>
           </div>
+
           <div className="relative z-10 flex-1 flex items-center justify-center w-full max-w-6xl mx-auto min-h-0 px-2 sm:px-4">
-            <motion.div
-              style={{
-                x: collegeX,
-                opacity: collegeOpacity,
-                scale: collegeScale,
-                rotateY: collegeRotateY,
-                transformPerspective: 1200,
-                pointerEvents: activeStage === 1 ? "auto" : "none",
-              }}
-              className="absolute inset-0 flex flex-col items-center justify-center w-full -mt-30 sm:mt-0">
-              <div className="w-full max-w-lg sm:max-w-2xl xl:max-w-3xl px-1 sm:px-2">
-                <EducationCard
-                  item={collegeData}
-                  isFeatured={true}
-                />
-              </div>
-              <div className="mt-2.5 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#1CD8D2] font-medium">
-                <span>
-                  Scroll down to slide to Both Schools
-                </span>
-
-                <motion.span
-                  animate={{
-                    x: [0, 5, 0],
-                    opacity: [0.6, 1, 0.6],
+            {isMobile ? (
+              <>
+                <motion.div
+                  style={{
+                    x: mCard1X,
+                    opacity: mCard1Opacity,
+                    scale: mCard1Scale,
+                    pointerEvents: mobileStage === 1 ? "auto" : "none",
                   }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 1.5,
-                    ease: "easeInOut",
-                  }}
-                  className="font-bold text-sm"
+                  className="absolute inset-0 flex flex-col items-center justify-center w-full px-1"
                 >
-                  →
-                </motion.span>
-              </div>
-            </motion.div>
-            <motion.div
-              style={{
-                x: schoolsX,
-                opacity: schoolsOpacity,
-                scale: schoolsScale,
-                rotateY: schoolsRotateY,
-                transformPerspective: 1200,
-                pointerEvents: activeStage === 2 ? "auto" : "none",
-              }}
-              className="absolute inset-0 flex flex-col items-center justify-center w-full px-2 sm:px-4">
+                  <div className="w-full max-w-md">
+                    <EducationCard item={collegeData} isFeatured={true} />
+                  </div>
+                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#1CD8D2] font-medium">
+                    <span>Scroll down to slide to 10+2 School</span>
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                      className="font-bold text-xs"
+                    >
+                      →
+                    </motion.span>
+                  </div>
+                </motion.div>
 
-              <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-7 items-stretch -mt-10 sm:mt-0">
-                {schoolData.map((item, idx) => (
+                <motion.div
+                  style={{
+                    x: mCard2X,
+                    opacity: mCard2Opacity,
+                    scale: mCard2Scale,
+                    pointerEvents: mobileStage === 2 ? "auto" : "none",
+                  }}
+                  className="absolute inset-0 flex flex-col items-center justify-center w-full px-1"
+                >
+                  <div className="w-full max-w-md">
+                    <EducationCard item={schoolData[0]} isFeatured={false} />
+                  </div>
+                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#00bf8f] font-medium">
+                    <span>Scroll down to slide to 10th School</span>
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                      className="font-bold text-xs"
+                    >
+                      →
+                    </motion.span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  style={{
+                    x: mCard3X,
+                    opacity: mCard3Opacity,
+                    scale: mCard3Scale,
+                    pointerEvents: mobileStage === 3 ? "auto" : "none",
+                  }}
+                  className="absolute inset-0 flex flex-col items-center justify-center w-full px-1"
+                >
+                  <div className="w-full max-w-md">
+                    <EducationCard item={schoolData[1]} isFeatured={false} />
+                  </div>
+                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#1CD8D2] font-medium text-center">
+                    <IoSparkles className="w-3 h-3 text-[#00bf8f] shrink-0" />
+                    <span>Foundational Schooling: 10th Board (Distinction)</span>
+                  </div>
+                </motion.div>
+              </>
+            ) : (
+              <>
+                <motion.div
+                  style={{
+                    x: collegeX,
+                    opacity: collegeOpacity,
+                    scale: collegeScale,
+                    rotateY: collegeRotateY,
+                    transformPerspective: 1200,
+                    pointerEvents: activeStage === 1 ? "auto" : "none",
+                  }}
+                  className="absolute inset-0 flex flex-col items-center justify-center w-full"
+                >
+                  <div className="w-full max-w-lg sm:max-w-2xl xl:max-w-3xl px-1 sm:px-2">
+                    <EducationCard item={collegeData} isFeatured={true} />
+                  </div>
+                  <div className="mt-2.5 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#1CD8D2] font-medium">
+                    <span>Scroll down to slide to Both Schools</span>
+                    <motion.span
+                      animate={{
+                        x: [0, 5, 0],
+                        opacity: [0.6, 1, 0.6],
+                      }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 1.5,
+                        ease: "easeInOut",
+                      }}
+                      className="font-bold text-sm"
+                    >
+                      →
+                    </motion.span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  style={{
+                    x: schoolsX,
+                    opacity: schoolsOpacity,
+                    scale: schoolsScale,
+                    rotateY: schoolsRotateY,
+                    transformPerspective: 1200,
+                    pointerEvents: activeStage === 2 ? "auto" : "none",
+                  }}
+                  className="absolute inset-0 flex flex-col items-center justify-center w-full px-2 sm:px-4"
+                >
+                  <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-7 items-stretch">
+                    {schoolData.map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{
+                          opacity: 0,
+                          y: 20,
+                        }}
+                        animate={
+                          activeStage === 2
+                            ? {
+                              opacity: 1,
+                              y: 0,
+                            }
+                            : {
+                              opacity: 0,
+                              y: 20,
+                            }
+                        }
+                        transition={{
+                          duration: 0.45,
+                          delay: idx * 0.12,
+                          ease: "easeOut",
+                        }}
+                      >
+                        <EducationCard item={item} isFeatured={false} />
+                      </motion.div>
+                    ))}
+                  </div>
+
                   <motion.div
-                    key={idx}
                     initial={{
                       opacity: 0,
-                      y: 20,
+                      y: 10,
                     }}
-                    animate={activeStage === 2 ? {
-                      opacity: 1,
-                      y: 0,
-                    } : {
-                      opacity: 0,
-                      y: 20,
-                    }}
+                    animate={
+                      activeStage === 2
+                        ? {
+                          opacity: 1,
+                          y: 0,
+                        }
+                        : {
+                          opacity: 0,
+                          y: 10,
+                        }
+                    }
                     transition={{
-                      duration: 0.45,
-                      delay: idx * 0.12,
-                      ease: "easeOut",
+                      delay: 0.35,
+                      duration: 0.4,
                     }}
+                    className="mt-2 sm:mt-4 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-[#00bf8f] font-medium text-center px-2"
                   >
-                    <EducationCard
-                      item={item}
-                      isFeatured={false}
-                    />
+                    <IoSparkles className="w-3 h-3 text-[#1CD8D2] shrink-0" />
+                    <span>
+                      Foundational Schooling: 10+2 Science & Secondary 10th
+                    </span>
                   </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 10,
-                }}
-                animate={activeStage === 2 ? {
-                  opacity: 1,
-                  y: 0,
-                } : {
-                  opacity: 0,
-                  y: 10,
-                }}
-                transition={{
-                  delay: 0.35,
-                  duration: 0.4,
-                }}
-                className="mt-2 sm:mt-4 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-[#00bf8f] font-medium text-center px-2">
-                <IoSparkles className="w-3 h-3 text-[#1CD8D2] shrink-0" />
-                <span>
-                  Foundational Schooling: 10+2 Science & Secondary 10th
-                </span>
-              </motion.div>
-
-            </motion.div>
+                </motion.div>
+              </>
+            )}
           </div>
 
           <div className="relative z-10 shrink-0 max-w-5xl mx-auto w-full pt-1 pb-1">
