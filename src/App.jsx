@@ -23,7 +23,14 @@ export default function App() {
       <Navbar />
       <ScrollProgress />
       <MusicPlayer />
-      {!introDone && <IntroAnimation onFinish={() => setIntroDone(true)} />}
+      {!introDone && (
+        <IntroAnimation
+          onFinish={() => {
+            window.scrollTo(0, 0);
+            setIntroDone(true);
+          }}
+        />
+      )}
       <Home introDone={introDone} />
 
       <About />

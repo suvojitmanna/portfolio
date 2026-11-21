@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -264,7 +264,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)]"
+              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)] mt-14 sm:mt-10"
             >
               <IoSparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00bf8f]" />
               <span>Academic Progression</span>
@@ -316,7 +316,7 @@ export default function Education() {
                 transformPerspective: 1200,
                 pointerEvents: activeStage === 1 ? "auto" : "none",
               }}
-              className="absolute inset-0 flex flex-col items-center justify-center w-full">
+              className="absolute inset-0 flex flex-col items-center justify-center w-full -mt-30 sm:mt-0">
               <div className="w-full max-w-lg sm:max-w-2xl xl:max-w-3xl px-1 sm:px-2">
                 <EducationCard
                   item={collegeData}
@@ -355,7 +355,7 @@ export default function Education() {
               }}
               className="absolute inset-0 flex flex-col items-center justify-center w-full px-2 sm:px-4">
 
-              <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-7 items-stretch">
+              <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-7 items-stretch -mt-10 sm:mt-0">
                 {schoolData.map((item, idx) => (
                   <motion.div
                     key={idx}

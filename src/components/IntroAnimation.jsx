@@ -16,6 +16,59 @@ export default function IntroAnimation({ onFinish }) {
   const greetingRef = useRef(null);
 
   useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    const preventScroll = (e) => {
+      e.preventDefault();
+    };
+
+    const handleKeydown = (e) => {
+      if (
+        [
+          "Space",
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+        ].includes(e.code)
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    const forceScrollTop = () => {
+      if (window.scrollY !== 0 || window.scrollX !== 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("keydown", handleKeydown);
+    window.addEventListener("scroll", forceScrollTop);
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+      window.removeEventListener("keydown", handleKeydown);
+      window.removeEventListener("scroll", forceScrollTop);
+      window.scrollTo(0, 0);
+    };
+  }, []);
+
+  useEffect(() => {
     let greetingTimer;
 
     if (index < greetings.length - 1) {
@@ -33,8 +86,12 @@ export default function IntroAnimation({ onFinish }) {
       );
 
       greetingTimer = setTimeout(() => {
+        window.scrollTo(0, 0);
         const tl = gsap.timeline({
-          onComplete: () => onFinish && onFinish(),
+          onComplete: () => {
+            window.scrollTo(0, 0);
+            if (onFinish) onFinish();
+          },
         });
 
         tl.to([overlayRef.current, greetingRef.current], {
@@ -59,7 +116,7 @@ export default function IntroAnimation({ onFinish }) {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center text-white overflow-hidden pointer-events-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center text-white overflow-hidden pointer-events-auto touch-none select-none"
     >
       <h1
         ref={greetingRef}
