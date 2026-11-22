@@ -193,7 +193,7 @@ export default function Projects() {
           <h2 className="text-3xl font-semibold z-10 text-center mt-2">
             My Work
           </h2>
-          <div className="relative w-full flex-1 flex items-center justify-center -mt-8">
+          <div className="relative w-full flex-1 flex items-center justify-center -mt-8 sm:-mt-0">
             {projects.map((project, idx) => (
               <div
                 key={project.title}
@@ -211,7 +211,7 @@ export default function Projects() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 30 }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="block text-center text-[clamp(2rem,5vw,3.2rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold mt-6"
+                      className="block text-center text-[clamp(3rem,6vw,3.5rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold mt-4"
                       style={{ zIndex: 5, textAlign: "left" }}
                     >
                       {project.title}
@@ -219,7 +219,7 @@ export default function Projects() {
                   )}
                 </AnimatePresence>
                 <div
-                  className="relative w-full overflow-hidden bg-black/20 mt-3 sm:ml-15 mb-10 sm:mb-1 rounded-xl h-[55vh] sm:h-[78vh] w-[44vh] sm:w-[150vh]"
+                  className="relative w-full overflow-hidden bg-black/20 mt-3 sm:ml-15 mb-10 sm:mb-1 rounded-xl h-[55vh] sm:h-[70vh] w-[44vh] sm:w-[145vh]"
                   style={{
                     zIndex: 10,
                     boxShadow: `0 30px 70px -15px ${project.bgColor}, 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 50px ${project.bgColor}40`,
@@ -251,7 +251,7 @@ export default function Projects() {
             ))}
           </div>
 
-          <div className="absolute z-30 flex items-center justify-center bottom-5 sm:bottom-3">
+          <div className="absolute z-30 flex items-center justify-center bottom-5 sm:bottom-4">
             <motion.a
               href={activeProject?.link}
               target="_blank"

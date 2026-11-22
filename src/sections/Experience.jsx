@@ -142,7 +142,6 @@ const Experience = () => {
               </div>
             </div>
 
-            {/* Mobile timeline */}
             <div className="relative w-full max-w-sm sm:max-w-md lg:hidden pl-7 sm:pl-9 pr-1 sm:pr-3">
               <div className="absolute left-2.5 sm:left-3 top-0 bottom-0 w-[2.5px] bg-white/15 rounded -translate-x-1/2">
                 <motion.div
