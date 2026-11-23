@@ -65,7 +65,7 @@ export default function Contact() {
       );
 
       setStatus("success");
-      setFormData({name: "",email: "",service: "",budget: "",idea: ""});
+      setFormData({ name: "", email: "", service: "", budget: "", idea: "" });
     } catch (err) {
       console.error("EmailJS Error:", err);
       setStatus("error");
@@ -74,7 +74,9 @@ export default function Contact() {
 
   return (
     <section
-      id="contact" className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10">
+      id="contact"
+      className="w-full min-h-screen relative bg-slate-50 dark:bg-black overflow-hidden text-slate-900 dark:text-white py-18 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10 transition-colors duration-300"
+    >
       <ParticlesBackground />
 
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
@@ -87,7 +89,7 @@ export default function Contact() {
           <motion.img
             src={Astra}
             alt="Contact"
-            className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
+            className="w-72 md:w-140 rounded-2xl object-cover"
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -97,13 +99,13 @@ export default function Contact() {
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
+          className="w-full md:w-1/2 bg-white/80 dark:bg-white/5 px-8 py-6 rounded-2xl shadow-xl dark:shadow-lg border border-black/10 dark:border-white/10 backdrop-blur-md transition-colors duration-300"
         >
-          <h2 className="text-3xl font-bold mb-6">Let’s Work Together</h2>
+          <h2 className="text-3xl font-bold mb-5 text-slate-900 dark:text-white">Let’s Work Together</h2>
 
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             <div className="flex flex-col">
-              <label className="mb-1">
+              <label className="mb-1 text-slate-700 dark:text-gray-200 font-medium">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -112,17 +114,17 @@ export default function Contact() {
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.name ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-black/[0.04] dark:bg-white/10 border ${
+                  errors.name ? "border-red-500" : "border-slate-300 dark:border-gray-500"
+                } text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 transition-colors`}
               />
               {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
               )}
             </div>
 
             <div className="flex flex-col">
-              <label className="mb-1">
+              <label className="mb-1 text-slate-700 dark:text-gray-200 font-medium">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -131,16 +133,16 @@ export default function Contact() {
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-black/[0.04] dark:bg-white/10 border ${
+                  errors.email ? "border-red-500" : "border-slate-300 dark:border-gray-500"
+                } text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 transition-colors`}
               />
               {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
               )}
             </div>
             <div className="flex flex-col">
-              <label className="mb-1">
+              <label className="mb-1 text-slate-700 dark:text-gray-200 font-medium">
                 Service Needed <span className="text-red-500">*</span>
               </label>
 
@@ -148,32 +150,32 @@ export default function Contact() {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.service ? "border-red-500" : "border-gray-500"
-                } focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-black/[0.04] dark:bg-white/10 border ${
+                  errors.service ? "border-red-500" : "border-slate-300 dark:border-gray-500"
+                } text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 transition-colors`}
               >
-                <option value="" disabled>
+                <option value="" disabled className="text-slate-500 dark:text-gray-400 bg-white dark:bg-neutral-900">
                   Something in mind?
                 </option>
-                <option value="Web Development" className="text-black">
+                <option value="Web Development" className="text-slate-900 dark:text-white bg-white dark:bg-neutral-900">
                   Web Development
                 </option>
-                <option value="Mobile Application" className="text-black">
+                <option value="Mobile Application" className="text-slate-900 dark:text-white bg-white dark:bg-neutral-900">
                   Mobile Application
                 </option>
-                <option value="Others" className="text-black">
+                <option value="Others" className="text-slate-900 dark:text-white bg-white dark:bg-neutral-900">
                   Others
                 </option>
               </select>
 
               {errors.service && (
-                <p className="text-red-500 text-xs">{errors.service}</p>
+                <p className="text-red-500 text-xs mt-1">{errors.service}</p>
               )}
             </div>
 
             {formData.service && formData.service !== "other" && (
               <div className="flex flex-col">
-                <label className="mb-1">
+                <label className="mb-1 text-slate-700 dark:text-gray-200 font-medium">
                   Budget <span className="text-red-500">*</span>
                 </label>
 
@@ -183,19 +185,19 @@ export default function Contact() {
                   placeholder="Your Budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className={`p-3 rounded-md bg-white/10 border ${
-                    errors.budget ? "border-red-500" : "border-gray-500"
-                  } text-white focus:outline-none focus:border-blue-500`}
+                  className={`p-3 rounded-md bg-black/[0.04] dark:bg-white/10 border ${
+                    errors.budget ? "border-red-500" : "border-slate-300 dark:border-gray-500"
+                  } text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 transition-colors`}
                 />
 
                 {errors.budget && (
-                  <p className="text-red-500 text-xs">{errors.budget}</p>
+                  <p className="text-red-500 text-xs mt-1">{errors.budget}</p>
                 )}
               </div>
             )}
 
             <div className="flex flex-col">
-              <label className="mb-1">
+              <label className="mb-1 text-slate-700 dark:text-gray-200 font-medium">
                 Idea <span className="text-red-500">*</span>
               </label>
 
@@ -205,13 +207,13 @@ export default function Contact() {
                 placeholder="Enter your idea"
                 value={formData.idea}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.idea ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-black/[0.04] dark:bg-white/10 border ${
+                  errors.idea ? "border-red-500" : "border-slate-300 dark:border-gray-500"
+                } text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-gray-400 focus:outline-none focus:border-cyan-500 transition-colors`}
               />
 
               {errors.idea && (
-                <p className="text-red-500 text-xs">{errors.idea}</p>
+                <p className="text-red-500 text-xs mt-1">{errors.idea}</p>
               )}
             </div>
 
@@ -219,10 +221,10 @@ export default function Contact() {
               <p
                 className={`text-sm ${
                   status === "success"
-                    ? "text-green-400"
+                    ? "text-emerald-500 dark:text-green-400"
                     : status === "error"
-                    ? "text-red-400"
-                    : "text-yellow-400"
+                    ? "text-red-500 dark:text-red-400"
+                    : "text-amber-500 dark:text-yellow-400"
                 }`}
               >
                 {status === "sending"
@@ -247,6 +249,7 @@ export default function Contact() {
                 rounded-md 
                 font-semibold 
                 transition
+                cursor-pointer
               "
             >
               {status === "sending" ? "Sending..." : "Send Message"}

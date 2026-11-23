@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden"
+      className="min-h-screen w-full flex items-center justify-center relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white overflow-hidden transition-colors duration-300"
       aria-label="About me"
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -37,11 +37,11 @@ export default function About() {
             <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63]">
               Suvojit Manna
             </h2>
-            <p className="mt-2 text-lg sm:text-xl text-white/90 font-semibold">
+            <p className="mt-2 text-lg sm:text-xl text-slate-700 dark:text-white/90 font-semibold">
               Full Stack Web Developer
             </p>
 
-            <p className="mt-4 text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
+            <p className="mt-4 text-slate-600 dark:text-gray-300 leading-relaxed text-base sm:text-lg max-w-2xl md:max-w-3xl">
               I build scalable, modern applications with a strong focus on clean architecture, intuitive UX, and performance. My toolkit spans React, Next.js, Node.js, Express.js, MongoDB, TypeScript, Tailwind CSS, Socket.IO, WebRTC, and AI technologies—bringing ideas to life from concept to production with robust APIs, real-time experiences, and smooth interfaces.
             </p>
 
@@ -53,14 +53,14 @@ export default function About() {
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center"
+                  className="rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-white/5 px-4 py-3 text-center"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 * i }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <div className="text-sm text-gray-400">{item.label}</div>
-                  <div className="text-base font-semibold text-white">
+                  <div className="text-sm text-slate-500 dark:text-gray-400">{item.label}</div>
+                  <div className="text-base font-semibold text-slate-900 dark:text-white">
                     {item.value}
                   </div>
                 </motion.div>
@@ -77,13 +77,13 @@ export default function About() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.4 }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
               About Me
             </h3>
 
-            <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-              I’m <span className="font-semibold text-white">Suvojit Manna</span>, a B.Tech Computer Science student and Full Stack Developer with hands-on experience building modern, scalable web applications using the{" "}
-              <span className="font-semibold text-white">
+            <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base sm:text-lg">
+              I’m <span className="font-semibold text-slate-900 dark:text-white">Suvojit Manna</span>, a B.Tech Computer Science student and Full Stack Developer with hands-on experience building modern, scalable web applications using the{" "}
+              <span className="font-semibold text-slate-900 dark:text-white">
                 MERN stack, Next.js, and TypeScript
               </span>.
               <br />
@@ -92,7 +92,7 @@ export default function About() {
               I enjoy turning complex ideas into user-friendly digital products with
               clean architecture, efficient backend logic, intuitive interfaces, and
               reliable software. My experience includes building{" "}
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-slate-900 dark:text-white">
                 real-time applications, authentication systems, REST APIs, dashboards,
                 database-driven workflows, and AI-powered applications
               </span>.
@@ -100,7 +100,7 @@ export default function About() {
               <br />
 
               Alongside full-stack development, I’m exploring{" "}
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-slate-900 dark:text-white">
                 AI/ML and AI application development
               </span>
               , combining modern web technologies with intelligent features to solve
@@ -117,50 +117,50 @@ export default function About() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.div
-              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-white/[0.07] transition-all duration-300"
+              className="rounded-2xl p-6 bg-black/[0.03] dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-black/[0.06] dark:hover:bg-white/[0.07] transition-all duration-300"
               whileHover={{ y: -5 }}
             >
-              <h4 className="text-lg font-bold text-white mb-3">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                 Full-Stack Development
               </h4>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 leading-relaxed">
                 MERN stack, REST APIs, authentication, dashboards
               </p>
             </motion.div>
 
             <motion.div
-              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-white/[0.07] transition-all duration-300"
+              className="rounded-2xl p-6 bg-black/[0.03] dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-black/[0.06] dark:hover:bg-white/[0.07] transition-all duration-300"
               whileHover={{ y: -5 }}
             >
-              <h4 className="text-lg font-bold text-white mb-3">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                 Backend & Databases
               </h4>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 leading-relaxed">
                 Node.js, Express, MongoDB, SQL,Redis
               </p>
             </motion.div>
 
             <motion.div
-              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-white/[0.07] transition-all duration-300"
+              className="rounded-2xl p-6 bg-black/[0.03] dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg hover:border-[#1CD8D2]/40 hover:bg-black/[0.06] dark:hover:bg-white/[0.07] transition-all duration-300"
               whileHover={{ y: -5 }}
             >
-              <h4 className="text-lg font-bold text-white mb-3">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                 AI & Application Development
               </h4>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 leading-relaxed">
                 AI/ML, AI-powered applications, RAG, intelligent features
               </p>
             </motion.div>
 
             <motion.div
-              className="rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-white/[0.07] transition-all duration-300"
+              className="rounded-2xl p-6 bg-black/[0.03] dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg hover:border-[#00bf8f]/40 hover:bg-black/[0.06] dark:hover:bg-white/[0.07] transition-all duration-300"
               whileHover={{ y: -5 }}
             >
-              <h4 className="text-lg font-bold text-white mb-3">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                 Tools & Deployment
               </h4>
 
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-slate-600 dark:text-gray-400 leading-relaxed">
                 Git, GitHub, Docker, Vercel, Render, Postman
               </p>
             </motion.div>
@@ -170,4 +170,3 @@ export default function About() {
     </section>
   );
 }
-

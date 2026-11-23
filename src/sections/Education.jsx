@@ -17,6 +17,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
+import { useTheme } from "../context/ThemeContext";
 
 const collegeData = {
   institution: "Meghnad Saha Institute of Technology",
@@ -81,6 +82,7 @@ const schoolData = [
 ];
 
 function EducationCard({ item, isFeatured = false }) {
+  const { isDark } = useTheme();
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -122,10 +124,15 @@ function EducationCard({ item, isFeatured = false }) {
       whileHover={{ y: -4, transition: { duration: 0.2, ease: "easeOut" } }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-7 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] backdrop-blur-2xl border flex flex-col justify-between overflow-hidden group transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.5)] ${isFeatured
-        ? "border-[#1CD8D2]/45 hover:border-[#1CD8D2]/70 shadow-[0_15px_45px_rgba(28,216,210,0.16)] min-h-0 sm:min-h-[380px] lg:min-h-[420px]"
-        : "border-white/10 hover:border-[#1CD8D2]/50 hover:shadow-[0_15px_40px_rgba(28,216,210,0.12)] min-h-0 md:min-h-[360px] lg:min-h-[400px]"
-        }`}
+      className={`relative rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 lg:p-7 ${
+        isDark
+          ? "bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.02] shadow-[0_15px_40px_rgba(0,0,0,0.5)]"
+          : "bg-white/90 shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
+      } backdrop-blur-2xl border flex flex-col justify-between overflow-hidden group transition-all duration-300 ${
+        isFeatured
+          ? "border-[#1CD8D2]/45 hover:border-[#1CD8D2]/70 shadow-[0_15px_45px_rgba(28,216,210,0.16)] min-h-0 sm:min-h-[380px] lg:min-h-[420px]"
+          : "border-slate-200 dark:border-white/10 hover:border-[#1CD8D2]/50 hover:shadow-[0_15px_40px_rgba(28,216,210,0.12)] min-h-0 md:min-h-[360px] lg:min-h-[400px]"
+      }`}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -136,19 +143,19 @@ function EducationCard({ item, isFeatured = false }) {
       <div className="relative z-10 flex-1 flex flex-col">
         <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#1CD8D2]/20 via-[#00bf8f]/15 to-[#302b63]/30 border border-[#1CD8D2]/35 flex items-center justify-center text-[#1CD8D2] shadow-[0_0_15px_rgba(28,216,210,0.25)] shrink-0">
+            <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-2xl bg-gradient-to-br from-[#1CD8D2]/20 via-[#00bf8f]/15 to-[#302b63]/30 border border-[#1CD8D2]/35 flex items-center justify-center text-[#0d9488] dark:text-[#1CD8D2] shadow-[0_0_15px_rgba(28,216,210,0.25)] shrink-0">
               <IconComponent className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-[#1CD8D2] font-bold">
+              <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-[#0d9488] dark:text-[#1CD8D2] font-bold">
                 {item.category}
               </span>
-              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">{item.duration}</p>
+              <p className="text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 font-medium">{item.duration}</p>
             </div>
           </div>
 
           {item.isCurrent ? (
-            <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/35 shadow-[0_0_12px_rgba(16,185,129,0.25)] shrink-0">
+            <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-xs font-semibold bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 border border-emerald-500/35 shadow-[0_0_12px_rgba(16,185,129,0.25)] shrink-0">
               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500" />
@@ -156,32 +163,32 @@ function EducationCard({ item, isFeatured = false }) {
               Active Program
             </span>
           ) : (
-            <span className="inline-flex items-center text-[9px] sm:text-[11px] font-medium text-gray-300 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 border border-white/10 shrink-0">
+            <span className="inline-flex items-center text-[9px] sm:text-[11px] font-medium text-slate-600 dark:text-gray-300 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/[0.05] dark:bg-white/5 border border-black/10 dark:border-white/10 shrink-0">
               Graduated
             </span>
           )}
         </div>
-        <h3 className="text-sm sm:text-xl md:text-2xl font-extrabold text-white group-hover:text-[#1CD8D2] transition-colors leading-snug mb-0.5 sm:mb-1">
+        <h3 className="text-sm sm:text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-[#0d9488] dark:group-hover:text-[#1CD8D2] transition-colors leading-snug mb-0.5 sm:mb-1">
           {item.degree}
         </h3>
-        <p className="text-[11px] sm:text-sm font-semibold text-gray-200">
+        <p className="text-[11px] sm:text-sm font-semibold text-slate-700 dark:text-gray-200">
           {item.institution}
         </p>
-        <p className="text-[10px] sm:text-xs text-gray-400 mb-1.5 sm:mb-2.5">{item.affiliation}</p>
-        <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-xl bg-gradient-to-r from-[#1CD8D2]/15 via-[#00bf8f]/10 to-[#302b63]/20 border border-[#1CD8D2]/35 text-[11px] sm:text-sm font-mono text-[#1CD8D2] shadow-[0_0_12px_rgba(28,216,210,0.12)] mb-1.5 sm:mb-2.5 self-start">
+        <p className="text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 mb-1.5 sm:mb-2.5">{item.affiliation}</p>
+        <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-md sm:rounded-xl bg-gradient-to-r from-[#1CD8D2]/15 via-[#00bf8f]/10 to-[#302b63]/20 border border-[#1CD8D2]/35 text-[11px] sm:text-sm font-mono text-[#0d9488] dark:text-[#1CD8D2] shadow-[0_0_12px_rgba(28,216,210,0.12)] mb-1.5 sm:mb-2.5 self-start">
           <FaStar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#00bf8f]" />
           <span className="font-bold">{item.score}</span>
         </div>
 
-        <p className="text-[11px] sm:text-sm text-gray-300 leading-snug sm:leading-relaxed font-light mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-none">
+        <p className="text-[11px] sm:text-sm text-slate-600 dark:text-gray-300 leading-snug sm:leading-relaxed font-light mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-none">
           {item.description}
         </p>
 
-        <div className="flex flex-wrap gap-1 sm:gap-2 pt-2 sm:pt-2.5 mt-auto border-t border-white/10">
+        <div className="flex flex-wrap gap-1 sm:gap-2 pt-2 sm:pt-2.5 mt-auto border-t border-black/10 dark:border-white/10">
           {item.highlights.map((tag, tIdx) => (
             <span
               key={tIdx}
-              className="text-[9px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded sm:rounded-lg bg-white/[0.05] border border-white/10 text-gray-200 font-medium group-hover:border-[#1CD8D2]/30 transition-colors"
+              className="text-[9px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded sm:rounded-lg bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 text-slate-700 dark:text-gray-200 font-medium group-hover:border-[#1CD8D2]/30 transition-colors"
             >
               {tag}
             </span>
@@ -189,9 +196,9 @@ function EducationCard({ item, isFeatured = false }) {
         </div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-between text-[10px] sm:text-xs text-gray-400 pt-2 sm:pt-2.5 mt-2 sm:mt-3 border-t border-white/10">
+      <div className="relative z-10 flex items-center justify-between text-[10px] sm:text-xs text-slate-500 dark:text-gray-400 pt-2 sm:pt-2.5 mt-2 sm:mt-3 border-t border-black/10 dark:border-white/10">
         <span className="flex items-center gap-1">
-          <FaCalendarAlt className="w-2.5 h-2.5 text-[#1CD8D2]" />
+          <FaCalendarAlt className="w-2.5 h-2.5 text-[#0d9488] dark:text-[#1CD8D2]" />
           {item.duration}
         </span>
         <span className="flex items-center gap-1">
@@ -296,7 +303,7 @@ export default function Education() {
   };
 
   return (
-    <section id="education" className="relative bg-black text-white">
+    <section id="education" className="relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white transition-colors duration-300">
       <div
         ref={sceneRef}
         style={{ height: isMobile ? "300vh" : "260vh", minHeight: "150vh" }}
@@ -315,7 +322,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)]"
+              className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-widest text-[#0d9488] dark:text-[#1CD8D2] font-semibold mb-1 px-3 py-0.5 sm:py-1 rounded-full bg-[#1CD8D2]/10 border border-[#1CD8D2]/25 shadow-[0_0_12px_rgba(28,216,210,0.15)]"
             >
               <IoSparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00bf8f]" />
               <span>Academic Progression</span>
@@ -332,12 +339,12 @@ export default function Education() {
                 <button
                   onClick={() => scrollToStage(1)}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 1
-                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
-                    : "text-gray-400 bg-white/5 border border-white/5"
+                    ? "bg-[#1CD8D2]/20 text-[#0d9488] dark:text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
+                    : "text-slate-600 dark:text-gray-400 bg-black/[0.04] dark:bg-white/5 border border-black/10 dark:border-white/5"
                     }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                   />
                   <span>01 • College</span>
@@ -347,11 +354,11 @@ export default function Education() {
                   onClick={() => scrollToStage(2)}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 2
                     ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/50 shadow-[0_0_12px_rgba(0,191,143,0.25)] font-bold"
-                    : "text-gray-400 bg-white/5 border border-white/5"
+                    : "text-slate-600 dark:text-gray-400 bg-black/[0.04] dark:bg-white/5 border border-black/10 dark:border-white/5"
                     }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                   />
                   <span>02 • 10+2</span>
@@ -360,12 +367,12 @@ export default function Education() {
                 <button
                   onClick={() => scrollToStage(3)}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-full transition-all duration-300 text-[10px] font-mono cursor-pointer ${mobileStage === 3
-                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
-                    : "text-gray-400 bg-white/5 border border-white/5"
+                    ? "bg-[#1CD8D2]/20 text-[#0d9488] dark:text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_12px_rgba(28,216,210,0.25)] font-bold"
+                    : "text-slate-600 dark:text-gray-400 bg-black/[0.04] dark:bg-white/5 border border-black/10 dark:border-white/5"
                     }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 3 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                    className={`w-1.5 h-1.5 rounded-full ${mobileStage === 3 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                   />
                   <span>03 • 10th</span>
@@ -376,12 +383,12 @@ export default function Education() {
                 <button
                   onClick={() => scrollToStage(1)}
                   className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 1
-                    ? "bg-[#1CD8D2]/20 text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
-                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                    ? "bg-[#1CD8D2]/20 text-[#0d9488] dark:text-[#1CD8D2] border border-[#1CD8D2]/50 shadow-[0_0_15px_rgba(28,216,210,0.25)]"
+                    : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white bg-black/[0.04] dark:bg-white/5 border border-black/10 dark:border-white/5"
                     }`}
                 >
                   <span
-                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-500"
+                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 1 ? "bg-[#1CD8D2] animate-pulse" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                   />
                   <span>01 • College</span>
@@ -391,11 +398,11 @@ export default function Education() {
                   onClick={() => scrollToStage(2)}
                   className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1 rounded-full transition-all duration-300 text-[11px] sm:text-xs font-mono cursor-pointer ${activeStage === 2
                     ? "bg-[#00bf8f]/20 text-[#00bf8f] border border-[#00bf8f]/50 shadow-[0_0_15px_rgba(0,191,143,0.25)]"
-                    : "text-gray-400 hover:text-white bg-white/5 border border-white/5"
+                    : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white bg-black/[0.04] dark:bg-white/5 border border-black/10 dark:border-white/5"
                     }`}
                 >
                   <span
-                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-500"
+                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${activeStage === 2 ? "bg-[#00bf8f] animate-pulse" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                   />
                   <span>02 • Both Schools (10+2 & 10th)</span>
@@ -403,7 +410,7 @@ export default function Education() {
               </div>
             )}
 
-            <div className="relative h-[2.5px] sm:h-[3px] bg-white/10 rounded-full overflow-hidden max-w-sm sm:max-w-md mx-auto">
+            <div className="relative h-[2.5px] sm:h-[3px] bg-black/10 dark:bg-white/10 rounded-full overflow-hidden max-w-sm sm:max-w-md mx-auto">
               <motion.div
                 className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#1CD8D2] via-[#00bf8f] to-[#302b63] shadow-[0_0_12px_#1CD8D2] origin-left"
                 style={{ width: lineWidth }}
@@ -426,7 +433,7 @@ export default function Education() {
                   <div className="w-full max-w-md">
                     <EducationCard item={collegeData} isFeatured={true} />
                   </div>
-                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#1CD8D2] font-medium">
+                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#0d9488] dark:text-[#1CD8D2] font-medium">
                     <span>Scroll down to slide to 10+2 School</span>
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
@@ -474,7 +481,7 @@ export default function Education() {
                   <div className="w-full max-w-md">
                     <EducationCard item={schoolData[1]} isFeatured={false} />
                   </div>
-                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#1CD8D2] font-medium text-center">
+                  <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-[#0d9488] dark:text-[#1CD8D2] font-medium text-center">
                     <IoSparkles className="w-3 h-3 text-[#00bf8f] shrink-0" />
                     <span>Foundational Schooling: 10th Board (Distinction)</span>
                   </div>
@@ -496,7 +503,7 @@ export default function Education() {
                   <div className="w-full max-w-lg sm:max-w-2xl xl:max-w-3xl px-1 sm:px-2">
                     <EducationCard item={collegeData} isFeatured={true} />
                   </div>
-                  <div className="mt-2.5 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#1CD8D2] font-medium">
+                  <div className="mt-2.5 sm:mt-5 flex items-center justify-center gap-2 text-[10px] sm:text-xs text-[#0d9488] dark:text-[#1CD8D2] font-medium">
                     <span>Scroll down to slide to Both Schools</span>
                     <motion.span
                       animate={{
@@ -578,7 +585,7 @@ export default function Education() {
                     }}
                     className="mt-2 sm:mt-4 flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-[#00bf8f] font-medium text-center px-2"
                   >
-                    <IoSparkles className="w-3 h-3 text-[#1CD8D2] shrink-0" />
+                    <IoSparkles className="w-3 h-3 text-[#0d9488] dark:text-[#1CD8D2] shrink-0" />
                     <span>
                       Foundational Schooling: 10+2 Science & Secondary 10th
                     </span>

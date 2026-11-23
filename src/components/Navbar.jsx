@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import gsap from "gsap";
 import OverlayMenu from "./OverlayMenu";
+import ThemeToggle from "./ThemeToggle";
 import { FiArrowUpRight } from "react-icons/fi";
 import Logo from "../../public/logo.png";
 
@@ -100,7 +101,7 @@ export default function Navbar() {
         }}
         className={`fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 md:px-10 py-2 sm:py-3.5 z-50 transition-colors duration-300 ${
           isScrolled
-            ? "bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+            ? "bg-white/80 dark:bg-black/70 backdrop-blur-xl border-b border-black/10 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             : "bg-transparent border-b border-transparent"
         }`}
       >
@@ -116,15 +117,15 @@ export default function Navbar() {
               alt="Logo"
               className="w-8 h-8 rounded-lg shadow-[0_0_15px_rgba(28,216,210,0.3)] group-hover:shadow-[0_0_20px_rgba(28,216,210,0.6)] transition-all duration-300"
             />
-            <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border-2 border-black" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border-2 border-white dark:border-black" />
           </div>
-          <div className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-1.5">
+          <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-1.5">
             <span>Suvojit</span>
           </div>
         </motion.a>
 
         <div className="hidden lg:flex items-center">
-          <ul className="flex items-center gap-1 bg-white/[0.05] border border-white/10 px-1 py-1 rounded-full backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.35)]">
+          <ul className="flex items-center gap-1 bg-black/[0.04] dark:bg-white/[0.05] border border-black/10 dark:border-white/10 px-1 py-1 rounded-full backdrop-blur-xl shadow-[0_4px_25px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.35)]">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               const isHovered = hoveredLink === item.name;
@@ -137,8 +138,8 @@ export default function Navbar() {
                     onMouseLeave={() => setHoveredLink(null)}
                     className={`relative z-10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 block ${
                       isActive
-                        ? "text-white font-bold"
-                        : "text-gray-400 hover:text-white"
+                        ? "text-slate-900 dark:text-white font-bold"
+                        : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
                     {item.name}
@@ -151,7 +152,7 @@ export default function Navbar() {
                   {isHovered && (
                     <motion.div
                       layoutId="desktopNavHover"
-                      className="absolute inset-0 rounded-full bg-white/10 border border-[#1CD8D2]/35 shadow-[0_0_15px_rgba(28,216,210,0.15)] pointer-events-none"
+                      className="absolute inset-0 rounded-full bg-black/[0.06] dark:bg-white/10 border border-[#1CD8D2]/35 shadow-[0_0_15px_rgba(28,216,210,0.15)] pointer-events-none"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -169,6 +170,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.05 }}
@@ -181,7 +183,8 @@ export default function Navbar() {
           </motion.a>
         </div>
 
-        <div className="block lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle compact={true} />
           <div
             ref={mobileMenuBtnRef}
             onMouseMove={handleMobileMenuMouseMove}
@@ -192,13 +195,13 @@ export default function Navbar() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               transition={{ type: "spring", stiffness: 350, damping: 18 }}
-              className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] hover:bg-[#1CD8D2]/20 border border-white/15 hover:border-[#1CD8D2]/45 backdrop-blur-md text-white hover:text-[#1CD8D2] shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(28,216,210,0.3)] transition-all duration-300 cursor-pointer focus:outline-none"
+              className="group flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] hover:bg-[#1CD8D2]/20 border border-black/15 dark:border-white/15 backdrop-blur-md text-slate-800 dark:text-white hover:text-[#0d9488] dark:hover:text-[#1CD8D2] shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(28,216,210,0.3)] transition-all duration-300 cursor-pointer focus:outline-none"
               aria-label="Open navigation menu bar"
             >
               <div className="flex flex-col gap-1 w-4">
-                <span className="h-[2px] w-full bg-white group-hover:bg-[#1CD8D2] transition-colors rounded-full" />
+                <span className="h-[2px] w-full bg-slate-800 dark:bg-white group-hover:bg-[#1CD8D2] transition-colors rounded-full" />
                 <span className="h-[2px] w-3/4 bg-[#1CD8D2] rounded-full group-hover:w-full transition-all duration-200" />
-                <span className="h-[2px] w-full bg-white group-hover:bg-[#00bf8f] transition-colors rounded-full" />
+                <span className="h-[2px] w-full bg-slate-800 dark:bg-white group-hover:bg-[#00bf8f] transition-colors rounded-full" />
               </div>
               <span className="text-xs font-semibold tracking-wider uppercase font-mono">
                 Menu
@@ -207,7 +210,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white/5 overflow-hidden pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-black/5 dark:bg-white/5 overflow-hidden pointer-events-none">
           <motion.div
             style={{ scaleX }}
             className="h-full bg-gradient-to-r from-[#00f0ff] via-[#1CD8D2] to-[#00ff80] origin-left shadow-[0_0_10px_rgba(0,240,255,0.8),0_0_20px_rgba(0,255,128,0.4)]"

@@ -18,7 +18,7 @@ export default function App() {
   const [introDone, setIntroDone] = useState(false);
 
   return (
-    <div className="relative animated-gradient text-white">
+    <div className="relative animated-gradient text-slate-900 dark:text-white transition-colors duration-300">
       <CustomCursor />
       <Navbar />
       <ScrollProgress />

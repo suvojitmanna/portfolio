@@ -186,10 +186,10 @@ const MusicPlayer = () => {
             : "opacity-0 translate-y-2 scale-95"
         } group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100`}
       >
-        <div className="relative px-3.5 py-1.5 rounded-full text-xs font-medium text-cyan-200 bg-neutral-900/90 backdrop-blur-md border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center gap-2 whitespace-nowrap">
+        <div className="relative px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-800 dark:text-cyan-200 bg-white/95 dark:bg-neutral-900/90 backdrop-blur-md border border-cyan-500/50 dark:border-cyan-400/40 shadow-lg dark:shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center gap-2 whitespace-nowrap">
           <DynamicMusicIcon isPlaying={isPlaying} size="sm" />
           <span>{infoText}</span>
-          <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-neutral-900/90 border-r border-b border-cyan-400/40 rotate-45" />
+          <div className="absolute -bottom-1.5 right-5 w-2.5 h-2.5 bg-white/95 dark:bg-neutral-900/90 border-r border-b border-cyan-500/50 dark:border-cyan-400/40 rotate-45" />
         </div>
       </div>
 
