@@ -297,8 +297,7 @@ export default function CustomCursor() {
             borderRadius: cursorState === "icon" ? "2px" : "9999px",
           }}
           transition={{ type: "spring", stiffness: 500, damping: 28 }}
-          className="w-2.5 h-2.5 bg-gradient-to-tr from-[#1CD8D2] via-white to-[#00bf8f] shadow-[0_0_12px_#1CD8D2,0_0_22px_rgba(0,191,143,0.85)]"
-        />
+          className="w-2.5 h-2.5 bg-gradient-to-tr from-[#1CD8D2] via-white to-[#00bf8f] shadow-[0_0_12px_#1CD8D2,0_0_22px_rgba(0,191,143,0.85)]"/>
       </motion.div>
     </>
   );
