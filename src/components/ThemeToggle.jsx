@@ -13,11 +13,10 @@ export default function ThemeToggle({ className = "", compact = false }) {
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.92 }}
       transition={{ type: "spring", stiffness: 350, damping: 18 }}
-      className={`relative inline-flex items-center justify-center cursor-pointer focus:outline-none transition-all duration-300 ${
-        compact
+      className={`relative inline-flex items-center justify-center cursor-pointer focus:outline-none transition-all duration-300 ${compact
           ? "w-8 h-8 rounded-full bg-black/[0.06] dark:bg-white/[0.08] hover:bg-[#1CD8D2]/20 border border-black/15 dark:border-white/15 text-slate-700 dark:text-white hover:text-[#0d9488] dark:hover:text-[#1CD8D2] shadow-sm backdrop-blur-md"
           : "px-3 py-1.5 rounded-full bg-black/[0.06] dark:bg-white/[0.08] hover:bg-[#1CD8D2]/20 border border-black/15 dark:border-white/15 text-slate-700 dark:text-white hover:text-[#0d9488] dark:hover:text-[#1CD8D2] shadow-sm hover:shadow-[0_0_15px_rgba(28,216,210,0.3)] backdrop-blur-md gap-1.5 text-xs font-semibold"
-      } ${className}`}
+        } ${className}`}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       data-cursor="icon"

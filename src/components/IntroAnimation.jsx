@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { useTheme } from "../context/ThemeContext";
 
 gsap.registerPlugin(MorphSVGPlugin);
 
-export default function IntroAnimation({ onFinish }) {
-  const greetings = [
-    "Hello", "नमस्ते", "Hola", "Bonjour",
-    "Ciao", "Olá", "Здравствуйте",
-    "Merhaba", "Γειά", "Hej", "Hallo", "Salam"
-  ];
+const greetings = [
+  "Hello", "नमस्ते", "Hola", "Bonjour",
+  "Ciao", "Olá", "Здравствуйте",
+  "Merhaba", "Γειά", "Hej", "Hallo", "Salam"
+];
 
+export default function IntroAnimation({ onFinish }) {
+  const { isDark } = useTheme();
   const [index, setIndex] = useState(0);
   const overlayRef = useRef(null);
   const greetingRef = useRef(null);
@@ -116,21 +118,25 @@ export default function IntroAnimation({ onFinish }) {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center text-white overflow-hidden pointer-events-auto touch-none select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center text-slate-900 dark:text-white overflow-hidden pointer-events-auto touch-none select-none transition-colors duration-300"
     >
       <h1
         ref={greetingRef}
-        className="text-5xl md:text-7xl lg:text-8xl font-bold absolute z-20"
+        className="text-5xl md:text-7xl lg:text-8xl font-bold absolute z-20 text-slate-900 dark:text-white"
       >
         {greetings[index]}
       </h1>
 
       <svg
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full fill-[#f8fafc] dark:fill-black transition-colors duration-300"
         viewBox="0 0 1440 900"
         preserveAspectRatio="none"
       >
-        <path fill="black" d="M0,0 L0,900 L1440,900 L1440,0 Z" />
+        <path
+          fill={isDark ? "#000000" : "#f8fafc"}
+          className="fill-[#f8fafc] dark:fill-black"
+          d="M0,0 L0,900 L1440,900 L1440,0 Z"
+        />
       </svg>
     </div>
   );
