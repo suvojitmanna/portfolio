@@ -5,6 +5,7 @@ import OverlayMenu from "./OverlayMenu";
 import ThemeToggle from "./ThemeToggle";
 import { FiArrowUpRight } from "react-icons/fi";
 import Logo from "../../public/logo.png";
+import LogoDark from "../../public/logo-dark.png";
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -113,9 +114,14 @@ export default function Navbar() {
         >
           <div className="relative">
             <img
+              src={LogoDark}
+              alt="Logo"
+              className="w-8 h-8 rounded-lg shadow-[0_0_15px_rgba(28,216,210,0.3)] group-hover:shadow-[0_0_20px_rgba(28,216,210,0.6)] transition-all duration-300 dark:hidden"
+            />
+            <img
               src={Logo}
               alt="Logo"
-              className="w-8 h-8 rounded-lg shadow-[0_0_15px_rgba(28,216,210,0.3)] group-hover:shadow-[0_0_20px_rgba(28,216,210,0.6)] transition-all duration-300"
+              className="w-8 h-8 rounded-lg shadow-[0_0_15px_rgba(28,216,210,0.3)] group-hover:shadow-[0_0_20px_rgba(28,216,210,0.6)] transition-all duration-300 hidden dark:block"
             />
             <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border-2 border-white dark:border-black" />
           </div>
