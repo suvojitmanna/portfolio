@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 import {
-  FaYoutube,
   FaXTwitter,
   FaLinkedinIn,
   FaInstagram,
@@ -28,10 +28,12 @@ const glowVariants = {
 };
 
 const Footer = () => {
+  const { isDark } = useTheme();
+
   return (
-    <footer className="relative overflow-hidden bg-black">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,204,0.35),transparent_70%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.30),transparent_70%)]" />
+    <footer className="relative overflow-hidden bg-slate-100 dark:bg-black transition-colors duration-300">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,204,0.15),transparent_70%)] dark:bg-[radial-gradient(55%_60%_at_70%_35%,rgba(13,88,204,0.35),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.15),transparent_70%)] dark:bg-[radial-gradient(50%_55%_at_30%_70%,rgba(16,185,129,0.30),transparent_70%)]" />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +42,7 @@ const Footer = () => {
       >
         <div className="w-full">
           <h1
-            className="font-bangers font-semibold leading-none text-white text-center select-none"
+            className="font-bangers font-semibold leading-none text-slate-900 dark:text-white text-center select-none"
             style={{
               fontSize: "clamp(3rem, 5vw, 14rem)", 
               letterSpacing: "0.02em",
@@ -48,7 +50,7 @@ const Footer = () => {
               paddingLeft: "3vw",
               paddingRight: "3vw",
               whiteSpace: "nowrap",
-              textShadow: "0 2px 18px rgba(0,0,0,0.45)",
+              textShadow: isDark ? "0 2px 18px rgba(0,0,0,0.45)" : "0 2px 18px rgba(0,0,0,0.15)",
             }}
           >
             Suvojit Manna
@@ -69,7 +71,7 @@ const Footer = () => {
               initial="initial"
               whileHover="hover"
               whileTap="tap"
-              className="text-gray-300 transition-colors duration-200"
+              className="text-slate-600 dark:text-gray-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-200"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -80,10 +82,10 @@ const Footer = () => {
             </motion.a>
           ))}
         </div>
-        <p className="text-gray-300 italic max-w-xl">
+        <p className="text-slate-600 dark:text-gray-300 italic max-w-xl">
           “Success is when preparation meets opportunity.”
         </p>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-slate-500 dark:text-gray-400">
           © {new Date().getFullYear()} Suvojit Manna. All rights reserved.
         </p>
       </motion.div>

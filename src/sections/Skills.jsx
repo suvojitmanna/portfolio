@@ -1,4 +1,4 @@
-import { FaJava, FaReact } from 'react-icons/fa';
+import { FaReact } from 'react-icons/fa';
 import {
   SiNextdotjs,
   SiTypescript,
@@ -21,9 +21,7 @@ import { motion, useMotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { TbApi } from 'react-icons/tb';
 
-
 export default function Skills() {
-
   const skills = [
     { icon: <SiTailwindcss />, name: "Tailwind CSS" },
     { icon: <FaReact />, name: "React" },
@@ -42,7 +40,7 @@ export default function Skills() {
     { icon: <SiCplusplus />, name: "C++" },
     { icon: <SiPython />, name: "Python" },
   ];
-  const repeated = [...skills, ...skills]
+  const repeated = [...skills, ...skills];
 
   const [dir, setDir] = useState(-1);
   const [active, setActive] = useState(false);
@@ -60,11 +58,10 @@ export default function Skills() {
       setActive(entry.isIntersecting && entry.intersectionRatio > 0.1);
     },
       { threshold: [0.1] }
-    )
+    );
     io.observe(el);
     return () => io.disconnect();
-
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!active) return;
@@ -85,10 +82,8 @@ export default function Skills() {
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
-    }
+    };
   }, [active]);
-
-
 
   useEffect(() => {
     let id;
@@ -105,22 +100,20 @@ export default function Skills() {
         if (next <= -loop) next += loop;
         if (next >= 0) next -= loop;
       }
-      x.set(next)
-      id = requestAnimationFrame(tick)
-    }
-    id = requestAnimationFrame(tick)
+      x.set(next);
+      id = requestAnimationFrame(tick);
+    };
+    id = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(id);
   }, [dir, x]);
-
 
   return (
     <section id="skills"
       ref={sectionRef}
-      className="h-1/2 w-full pb-6 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden">
+      className="h-1/2 w-full pb-6 flex flex-col items-center justify-center relative bg-slate-50 dark:bg-black text-slate-900 dark:text-white overflow-hidden transition-colors duration-300">
       <div className='absolute inset-0 pointer-events-none'>
         <div className='absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2] opacity-20 blur-[120px] animate-pulse' />
         <div className='absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2] opacity-20 blur-[120px] animate-pulse delay-500' />
-
       </div>
 
       <motion.h2 className='text-4xl mt-5 sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] z-10'
@@ -130,11 +123,10 @@ export default function Skills() {
       >
         My Skills
       </motion.h2>
-      <motion.p className='mt-2 mb-8 text-white/90 text-base sm:text-lg z-10'
+      <motion.p className='mt-2 mb-8 text-slate-600 dark:text-white/90 text-base sm:text-lg z-10'
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-
       >
         Modern Applications | Modern Technologies
       </motion.p>
@@ -142,10 +134,9 @@ export default function Skills() {
       <div className='relative pt-2 w-full overflow-hidden'>
         <motion.div
           ref={trackRef}
-          className='flex gap-10 text-6xl text-[#1cd8d2]'
+          className='flex gap-10 text-6xl text-[#0d9488] dark:text-[#1cd8d2]'
           style={{ x, whiteSpace: "nowrap", willChange: "transform" }}
         >
-
           {repeated.map((s, i) => (
             <div
               key={i} className='flex flex-col items-center gap-2 min-w-[120px]'
@@ -155,17 +146,13 @@ export default function Skills() {
               <span className='hover:scale-125 transition-transform duration-300'>
                 {s.icon}
               </span>
-              <p className='text-sm'>
+              <p className='text-sm text-slate-700 dark:text-gray-200'>
                 {s.name}
               </p>
             </div>
           ))}
         </motion.div>
-
-
       </div>
-
-
     </section>
-  )
+  );
 }

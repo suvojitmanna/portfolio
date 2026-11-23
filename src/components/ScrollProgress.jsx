@@ -159,7 +159,7 @@ export default function ScrollProgress() {
       <button
         onClick={scrollToTop}
         data-cursor="icon"
-        className="mb-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
+        className="mb-2 p-1.5 rounded-full text-slate-500 dark:text-white/50 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to top"
         title="Scroll to top"
       >
@@ -174,7 +174,7 @@ export default function ScrollProgress() {
         onPointerCancel={handlePointerUp}
         className="relative h-56 sm:h-72 w-8 flex items-center justify-center cursor-pointer group"
       >
-        <div className="absolute w-1 sm:w-1.5 h-full rounded-full bg-white/10 backdrop-blur-md overflow-hidden">
+        <div className="absolute w-1 sm:w-1.5 h-full rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-md overflow-hidden">
           <div
             className="w-full rounded-full bg-gradient-to-b from-[#00f0ff] via-[#1CD8D2] to-[#00ff80] shadow-[0_0_10px_rgba(0,240,255,0.7)] transition-all duration-75"
             style={{ height: `${percentage}%` }}
@@ -186,7 +186,7 @@ export default function ScrollProgress() {
             key={sec.id}
             onClick={(e) => scrollToSection(e, sec.id)}
             style={{ top: `${sec.ratio * 100}%` }}
-            className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white/30 hover:bg-cyan-300 hover:scale-150 transition-all duration-200 z-10 focus:outline-none"
+            className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-black/30 dark:bg-white/30 hover:bg-cyan-500 dark:hover:bg-cyan-300 hover:scale-150 transition-all duration-200 z-10 focus:outline-none"
             title={sec.label}
             aria-label={`Jump to ${sec.label}`}
           />
@@ -201,28 +201,28 @@ export default function ScrollProgress() {
             } transition-transform duration-75 active:scale-105`}
         >
           <div
-            className={`flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-neutral-900/90 backdrop-blur-md border border-cyan-400/60 shadow-[0_0_14px_rgba(0,240,255,0.45)] text-[10px] sm:text-xs font-mono font-bold text-cyan-200 transition-all duration-200 ${isDragging || isHovered
+            className={`flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/95 dark:bg-neutral-900/90 backdrop-blur-md border border-cyan-500/60 dark:border-cyan-400/60 shadow-md dark:shadow-[0_0_14px_rgba(0,240,255,0.45)] text-[10px] sm:text-xs font-mono font-bold text-cyan-800 dark:text-cyan-200 transition-all duration-200 ${isDragging || isHovered
               ? "border-[#00ff80] shadow-[0_0_18px_rgba(0,255,128,0.55)] scale-105"
               : ""
               }`}
           >
             <span
-              className={`w-1.5 h-1.5 rounded-full ${isDragging ? "bg-emerald-400 animate-ping" : "bg-cyan-400"
+              className={`w-1.5 h-1.5 rounded-full ${isDragging ? "bg-emerald-400 animate-ping" : "bg-cyan-500 dark:bg-cyan-400"
                 }`}
             />
             <span>{percentage}%</span>
           </div>
 
           <div
-            className={`absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-neutral-900/95 backdrop-blur-md border border-cyan-400/40 text-white text-[11px] font-medium shadow-[0_0_15px_rgba(0,0,0,0.6)] whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${isHovered || isDragging
+            className={`absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border border-slate-200 dark:border-cyan-400/40 text-slate-900 dark:text-white text-[11px] font-medium shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.6)] whitespace-nowrap pointer-events-none transition-all duration-200 flex items-center gap-1.5 ${isHovered || isDragging
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-2"
               }`}
           >
-            <span className="text-cyan-400 font-semibold">{activeSection}</span>
-            <span className="text-gray-400">•</span>
-            <span className="text-emerald-300 font-mono font-bold">{percentage}%</span>
-            {isDragging && <span className="text-[10px] text-gray-400 ml-1">(Dragging)</span>}
+            <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{activeSection}</span>
+            <span className="text-slate-400 dark:text-gray-400">•</span>
+            <span className="text-emerald-600 dark:text-emerald-300 font-mono font-bold">{percentage}%</span>
+            {isDragging && <span className="text-[10px] text-slate-400 dark:text-gray-400 ml-1">(Dragging)</span>}
           </div>
         </div>
       </div>
@@ -230,7 +230,7 @@ export default function ScrollProgress() {
       <button
         onClick={scrollToBottom}
         data-cursor="icon"
-        className="mt-2 p-1.5 rounded-full text-white/50 hover:text-cyan-300 hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
+        className="mt-2 p-1.5 rounded-full text-slate-500 dark:text-white/50 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-200 cursor-pointer focus:outline-none"
         aria-label="Scroll to bottom"
         title="Scroll to bottom"
       >

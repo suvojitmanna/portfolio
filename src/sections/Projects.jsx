@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
+import { useTheme } from "../context/ThemeContext";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import img3 from "../assets/img3.png";
@@ -31,28 +32,36 @@ const useIsMobile = (query = "(max-width: 639px)") => {
 
 export default function Projects() {
   const isMobile = useIsMobile();
+  const { isDark } = useTheme();
+
   const projects = React.useMemo(
     () => [
       {
         title: "Whatsapp-Clone",
         link: "https://whatsapp-gilt-alpha.vercel.app/",
-        bgColor: isMobile ? "#012b1c" : "#075e54",
+        bgColor: isDark
+          ? (isMobile ? "#012b1c" : "#075e54")
+          : (isMobile ? "#e6f7f0" : "#d1fae5"),
         image: isMobile ? photo1 : img1,
       },
       {
         title: "Live-classes",
         link: "https://live-classes.vercel.app/",
-        bgColor: isMobile ? "#0f0436" : "#4c1d95",
+        bgColor: isDark
+          ? (isMobile ? "#0f0436" : "#4c1d95")
+          : (isMobile ? "#f5f0ff" : "#ede9fe"),
         image: isMobile ? photo2 : img2,
       },
       {
         title: "Interview-IQ",
         link: "https://ai-interview-two-sigma.vercel.app/",
-        bgColor: isMobile ? "#08122d" : "#140f41",
+        bgColor: isDark
+          ? (isMobile ? "#08122d" : "#140f41")
+          : (isMobile ? "#eef2ff" : "#e0e7ff"),
         image: isMobile ? photo3 : img3,
       },
     ],
-    [isMobile]
+    [isMobile, isDark]
   );
 
   const sceneRef = React.useRef(null);
@@ -78,7 +87,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={sceneRef}
-      className="relative text-white"
+      className="relative text-slate-900 dark:text-white transition-colors duration-400"
       style={{
         height: `${100 * projects.length}vh`,
         backgroundColor: activeProject.bgColor,
@@ -89,8 +98,8 @@ export default function Projects() {
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-between px-3 py-9">
           <div className="relative z-20 flex flex-col items-center pt-5">
             <div className="flex items-center gap-3">
-              <h2 className="text-2xl font-bold tracking-wide">My Work</h2>
-              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/15 border border-white/20">
+              <h2 className="text-2xl font-bold tracking-wide text-slate-900 dark:text-white">My Work</h2>
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-black/10 dark:bg-white/15 border border-black/15 dark:border-white/20 text-slate-800 dark:text-white">
                 0{activeIndex + 1} / 0{projects.length}
               </span>
             </div>
@@ -100,8 +109,11 @@ export default function Projects() {
                   key={proj.title}
                   layout
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className={`h-1.5 rounded-full ${activeIndex === idx ? "w-9 bg-white" : "w-2 bg-white/35"
-                    }`}
+                  className={`h-1.5 rounded-full ${
+                    activeIndex === idx
+                      ? "w-9 bg-slate-900 dark:bg-white"
+                      : "w-2 bg-black/30 dark:bg-white/35"
+                  }`}
                 />
               ))}
             </div>
@@ -128,7 +140,7 @@ export default function Projects() {
                   initial={{ opacity: 0, y: -15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08, duration: 0.35 }}
-                  className="text-3xl font-bangers italic font-semibold tracking-wider text-white/95 mb-2 drop-shadow-md text-center"
+                  className="text-3xl font-bangers italic font-semibold tracking-wider text-slate-900 dark:text-white/95 mb-2 drop-shadow-md text-center"
                 >
                   {activeProject.title}
                 </MH3>
@@ -146,7 +158,9 @@ export default function Projects() {
                     alt={activeProject.title}
                     className="w-full h-full object-contain rounded-2xl"
                     style={{
-                      filter: `drop-shadow(0 22px 40px rgba(0,0,0,0.75)) drop-shadow(0 0 28px ${activeProject.bgColor})`,
+                      filter: isDark
+                        ? `drop-shadow(0 22px 40px rgba(0,0,0,0.75)) drop-shadow(0 0 28px ${activeProject.bgColor})`
+                        : `drop-shadow(0 22px 40px rgba(0,0,0,0.25)) drop-shadow(0 0 28px ${activeProject.bgColor})`,
                     }}
                     loading="lazy"
                   />
@@ -167,9 +181,11 @@ export default function Projects() {
                 exit={{ opacity: 0, y: 15, scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 280, damping: 20 }}
                 whileTap={{ scale: 0.94 }}
-                className="group flex items-center gap-2 px-7 py-3 font-semibold rounded-full bg-white text-black shadow-xl text-sm"
+                className="group flex items-center gap-2 px-7 py-3 font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-black shadow-xl text-sm hover:scale-105 transition-all"
                 style={{
-                  boxShadow: `0 12px 30px -5px ${activeProject.bgColor}95, 0 8px 20px -6px rgba(0,0,0,0.65)`,
+                  boxShadow: isDark
+                    ? `0 12px 30px -5px ${activeProject.bgColor}95, 0 8px 20px -6px rgba(0,0,0,0.65)`
+                    : `0 12px 30px -5px ${activeProject.bgColor}95, 0 8px 20px -6px rgba(0,0,0,0.2)`,
                 }}
                 aria-label={`View ${activeProject?.title}`}
               >
@@ -190,17 +206,18 @@ export default function Projects() {
         </div>
       ) : (
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-          <h2 className="text-3xl font-semibold z-10 text-center mt-2">
+          <h2 className="text-3xl font-semibold z-10 text-center mt-2 text-slate-900 dark:text-white">
             My Work
           </h2>
           <div className="relative w-full flex-1 flex items-center justify-center -mt-8 sm:-mt-0">
             {projects.map((project, idx) => (
               <div
                 key={project.title}
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${activeIndex === idx
-                  ? "opacity-100 z-20"
-                  : "opacity-0 z-0 sm:z-10"
-                  }`}
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
+                  activeIndex === idx
+                    ? "opacity-100 z-20"
+                    : "opacity-0 z-0 sm:z-10"
+                }`}
                 style={{ width: "85%", maxWidth: "1200px" }}
               >
                 <AnimatePresence mode="wait">
@@ -211,7 +228,7 @@ export default function Projects() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 30 }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
-                      className="block text-center text-[clamp(3rem,6vw,3.5rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold mt-4"
+                      className="block text-center text-[clamp(3rem,6vw,3.5rem)] text-slate-900 dark:text-white/95 sm:absolute sm:-top-21 sm:left-[45%] lg:left-[0%] sm:mb-0 font-bangers italic font-semibold mt-4"
                       style={{ zIndex: 5, textAlign: "left" }}
                     >
                       {project.title}
@@ -219,10 +236,12 @@ export default function Projects() {
                   )}
                 </AnimatePresence>
                 <div
-                  className="relative w-full overflow-hidden bg-black/20 mt-3 sm:ml-15 mb-10 sm:mb-1 rounded-xl h-[55vh] sm:h-[70vh] w-[44vh] sm:w-[145vh]"
+                  className="relative w-full overflow-hidden bg-black/10 dark:bg-black/20 mt-3 sm:ml-15 mb-10 sm:mb-1 rounded-xl h-[55vh] sm:h-[70vh] w-[44vh] sm:w-[145vh]"
                   style={{
                     zIndex: 10,
-                    boxShadow: `0 30px 70px -15px ${project.bgColor}, 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 50px ${project.bgColor}40`,
+                    boxShadow: isDark
+                      ? `0 30px 70px -15px ${project.bgColor}, 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 50px ${project.bgColor}40`
+                      : `0 30px 70px -15px ${project.bgColor}, 0 20px 40px -15px rgba(0,0,0,0.15), 0 0 50px ${project.bgColor}40`,
                     transition: "box-shadow 400ms ease",
                   }}
                 >
@@ -233,7 +252,9 @@ export default function Projects() {
                     style={{
                       position: "relative",
                       zIndex: 10,
-                      filter: `drop-shadow(0 20px 35px ${project.bgColor}) drop-shadow(0 12px 25px rgba(0,0,0,0.65))`,
+                      filter: isDark
+                        ? `drop-shadow(0 20px 35px ${project.bgColor}) drop-shadow(0 12px 25px rgba(0,0,0,0.65))`
+                        : `drop-shadow(0 20px 35px ${project.bgColor}) drop-shadow(0 12px 25px rgba(0,0,0,0.25))`,
                       transition: "filter 350ms ease",
                     }}
                     loading="lazy"
@@ -258,9 +279,11 @@ export default function Projects() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="group flex items-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 font-semibold rounded-full bg-white text-black hover:bg-white/95 transition-all duration-300 text-sm sm:text-base cursor-pointer shadow-lg"
+              className="group flex items-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 font-semibold rounded-full bg-slate-900 text-white dark:bg-white dark:text-black hover:bg-slate-800 dark:hover:bg-white/95 transition-all duration-300 text-sm sm:text-base cursor-pointer shadow-lg"
               style={{
-                boxShadow: `0 12px 30px -5px ${activeProject.bgColor}90, 0 8px 20px -6px rgba(0,0,0,0.6)`,
+                boxShadow: isDark
+                  ? `0 12px 30px -5px ${activeProject.bgColor}90, 0 8px 20px -6px rgba(0,0,0,0.6)`
+                  : `0 12px 30px -5px ${activeProject.bgColor}90, 0 8px 20px -6px rgba(0,0,0,0.2)`,
               }}
               aria-label={`View ${activeProject?.title}`}
             >

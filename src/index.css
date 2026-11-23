@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+html.dark {
+  background-color: #000000;
+  color: #ffffff;
+}
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
@@ -14,6 +26,14 @@
 
 @layer utilities {
   .animated-gradient {
+    background: linear-gradient(-45deg, #f0fdf4, #e0f2fe, #f5f3ff);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  :is(.dark, .dark *) .animated-gradient,
+  .dark .animated-gradient,
+  .dark.animated-gradient {
     background: linear-gradient(-45deg, #302b63, #00bf8f, #1CD8D2);
     background-size: 400% 400%;
     animation: gradientShift 12s ease infinite;
@@ -153,4 +173,3 @@
     cursor: text !important;
   }
 }
-

@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import avatar from "../assets/avator.png";
-import { FaXTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa6";
-import { FaYoutube, FaInstagram } from "react-icons/fa6";
+import { FaXTwitter, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa6";
 import ParticleBackground from "../components/ParticlesBackground";
 
 const socials = [
@@ -12,7 +10,6 @@ const socials = [
   { Icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/suvo.jit2006/" },
   { Icon: FaGithub, label: "GitHub", href: "https://github.com/suvojitmanna" },
 ];
-
 
 const glowVariants = {
   initial: { scale: 1, y: 0, filter: "drop-shadow(0 0 0 rgba(0,0,0,0))" },
@@ -63,7 +60,7 @@ const Home = React.forwardRef((props, ref) => {
     <section
       ref={ref}
       id="home"
-      className="min-h-screen w-full relative overflow-hidden bg-black flex items-center lg:pl-40 py-20 sm:py-24 lg:py-0 pr-2 -pl-5 sm:pl-0 sm:pr-0"
+      className="min-h-screen w-full relative overflow-hidden bg-slate-50 dark:bg-black text-slate-900 dark:text-white flex items-center lg:pl-40 py-20 sm:py-24 lg:py-0 pr-2 -pl-5 sm:pl-0 sm:pr-0 transition-colors duration-300"
     >
       <ParticleBackground />
 
@@ -100,18 +97,6 @@ const Home = React.forwardRef((props, ref) => {
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <div className="w-full lg:pr-12 xl:pr-24 mx-auto max-w-[48rem]">
-            <motion.div
-              className="pt-20 sm:mb-3 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <span>{roles[index].substring(0, subIndex)}</span>
-              <span
-                className="inline-block w-[2px] ml-1 bg-white animate-pulse align-middle"
-                style={{ height: "0.5em" }}
-              />
-            </motion.div>
 
             <motion.h1
               className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-transparent bg-clip-text 
@@ -122,19 +107,32 @@ const Home = React.forwardRef((props, ref) => {
             >
               Hello, I&apos;m
               <br />
-              <span className="text-white font-bold text-4xl sm:text-6xl md:text-7xl lg:text-7xl block break-words lg:whitespace-nowrap">
+              <span className="text-slate-900 dark:text-white font-bold text-4xl sm:text-6xl md:text-7xl lg:text-7xl block break-words lg:whitespace-nowrap">
                 Suvojit Manna
               </span>
             </motion.h1>
 
+            <motion.div
+              className="pt-5 sm:mb-3 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 dark:text-white tracking-wide min-h-[1.6em]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <span>{roles[index].substring(0, subIndex)}</span>
+              <span
+                className="inline-block w-[2px] ml-1 bg-slate-800 dark:bg-white animate-pulse align-middle"
+                style={{ height: "0.5em" }}
+              />
+            </motion.div>
+
             <motion.p
-              className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed"
+              className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg text-slate-600 dark:text-gray-300 max-w-3xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               I turn complex ideas into modern, scalable web applications <br />
-              — building fast,interactive, and real-time experiences with a focus on clean architecture,
+              — building fast, interactive, and real-time experiences with a focus on clean architecture,
               seamless UX, intuitive design, and practical AI integration.
             </motion.p>
 
@@ -155,8 +153,8 @@ const Home = React.forwardRef((props, ref) => {
               <a
                 href="/Resume.pdf"
                 download
-                className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-base sm:text-lg font-medium text-black bg-white 
-                hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
+                className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-base sm:text-lg font-medium text-slate-900 dark:text-black bg-slate-200 dark:bg-white 
+                hover:bg-slate-300 dark:hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
               >
                 My Resume
               </a>
@@ -168,7 +166,7 @@ const Home = React.forwardRef((props, ref) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.8 }}
             >
-              {socials.map(({Icon, label, href }) => (
+              {socials.map(({ Icon, label, href }) => (
                 <motion.a
                   key={label}
                   href={href}
@@ -180,7 +178,7 @@ const Home = React.forwardRef((props, ref) => {
                   initial="initial"
                   whileHover="hover"
                   whileTap="tap"
-                  className="text-gray-300"
+                  className="text-slate-600 dark:text-gray-300 transition-colors"
                 >
                   <Icon />
                 </motion.a>

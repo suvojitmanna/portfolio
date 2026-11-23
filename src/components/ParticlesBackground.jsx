@@ -1,15 +1,21 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 export default function ParticleBackground() {
   const canvasRef = useRef(null);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     let particles = [];
     const particleCount = 50;
-    const colors = ["rgba(255, 255, 255, 0.7)"]
+    const colors = isDark
+      ? ["rgba(255, 255, 255, 0.7)"]
+      : ["rgba(13, 148, 136, 0.45)", "rgba(99, 102, 241, 0.35)", "rgba(16, 185, 129, 0.4)"];
+
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -40,13 +46,16 @@ export default function ParticleBackground() {
         this.draw();
       }
     }
+
     function createParticles() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
     }
+
     function handleResize() {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       createParticles();
@@ -65,7 +74,7 @@ export default function ParticleBackground() {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <canvas

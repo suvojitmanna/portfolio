@@ -5,7 +5,7 @@ import w1 from "../assets/w1.PNG";
 import w2 from "../assets/w2.PNG";
 import { motion } from "framer-motion";
 
-const MH2 = motion.h2
+const MH2 = motion.h2;
 const MDiv = motion.div;
 
 const testimonials = [
@@ -43,13 +43,13 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 pt-15"
+      className="relative min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-white flex flex-col items-center justify-center px-6 pt-15 transition-colors duration-300"
     >
       <MH2
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl font-bold mb-8"
+        className="text-4xl font-bold mb-8 text-slate-900 dark:text-white"
       >
         What People Say
       </MH2>
@@ -62,19 +62,19 @@ function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: idx * 0.2 }}
             viewport={{ once: true }}
-            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:-rotate-1"
+            className="bg-white/80 dark:bg-white/10 backdrop-blur-lg border border-black/10 dark:border-white/20 shadow-xl dark:shadow-[0_15px_40px_rgba(0,0,0,0.5)] rounded-2xl p-6 flex flex-col items-center text-center transform transition duration-500 hover:scale-105 hover:-rotate-1"
           >
             <img
               src={testi.image}
               alt={testi.name}
-              className="w-20 h-20 rounded-full border-2 border-white/40 mb-4 object-cover"
+              className="w-20 h-20 rounded-full border-2 border-slate-300 dark:border-white/40 mb-4 object-cover"
               loading="lazy"
             />
-            <p className="text-gray-200 italic mb-4">
+            <p className="text-slate-700 dark:text-gray-200 italic mb-4">
               "{testi.review}"
             </p>
-            <h3 className="text-lg font-semibold">{testi.name}</h3>
-            <p className="text-sm text-gray-400">{testi.role}</p>
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{testi.name}</h3>
+            <p className="text-sm text-slate-500 dark:text-gray-400">{testi.role}</p>
           </MDiv>
         ))}
       </div>
